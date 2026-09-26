@@ -5,45 +5,68 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#080808">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="My Goal Tracker">
-<title>My Goal Tracker</title>
+<meta name="apple-mobile-web-app-title" content="Hellcat Goal Tracker">
+<title>Hellcat Goal Tracker</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#070707;color:#f7f7f7;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:#070707;color:#f7f7f7;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif}
 header{padding:48px 18px 18px;background:linear-gradient(145deg,#101010,#1a1a1a);border-bottom:1px solid #333;position:sticky;top:0;z-index:10}
-h1{font-size:34px;line-height:1.05;margin:0 0 6px}.green{color:#adff4f}.sub{color:#aaa}
-main{max-width:760px;margin:auto;padding:15px 14px 80px}.card{background:#111;border:1px solid #303030;border-radius:20px;padding:18px;margin:13px 0}
+h1{font-size:32px;line-height:1.05;margin:0 0 6px}
+.green{color:#adff4f}.sub,.muted{color:#aaa}
+main{max-width:760px;margin:auto;padding:15px 14px 80px}
+.card{background:#111;border:1px solid #303030;border-radius:20px;padding:18px;margin:13px 0}
 h2{font-size:21px;margin:0 0 12px}h3{font-size:16px;margin:15px 0 7px}
-p{font-size:17px;line-height:1.55;color:#eee}.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.stat{background:#191919;border-radius:15px;padding:13px}.label{font-size:12px;color:#999}.value{font-size:23px;font-weight:800;margin-top:3px}
-input,button,textarea{font:inherit}input,textarea{width:100%;background:#191919;color:#fff;border:1px solid #444;border-radius:12px;padding:12px;margin:5px 0 10px}
-button{background:#adff4f;color:#080808;border:0;border-radius:12px;padding:12px 15px;font-weight:800;margin:4px 3px 4px 0}.secondary{background:#252525;color:#fff;border:1px solid #444}
+p{font-size:17px;line-height:1.55;color:#eee}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.stat{background:#191919;border-radius:15px;padding:13px}
+.label{font-size:12px;color:#999}.value{font-size:23px;font-weight:800;margin-top:3px}
+input,button{font:inherit}
+input[type=number],input[type=text]{width:100%;background:#191919;color:#fff;border:1px solid #444;border-radius:12px;padding:12px;margin:5px 0 10px}
+button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;background:#adff4f;color:#080808;border:0;border-radius:12px;padding:12px 15px;font-weight:800;margin:4px 3px 4px 0}
+button.secondary{background:#252525;color:#fff;border:1px solid #444}
 .progress{height:12px;background:#2b2b2b;border-radius:99px;overflow:hidden}.bar{height:100%;width:0;background:#adff4f;transition:.3s}
-.check{display:flex;gap:9px;align-items:center;font-size:16px;margin:10px 0}.check input{width:auto;margin:0}
-nav{display:flex;gap:7px;overflow:auto;margin-top:14px}nav button{white-space:nowrap;background:#202020;color:#fff;border:1px solid #444;padding:9px 12px}
-.big{font-size:31px;font-weight:900}.muted{color:#999;font-size:13px}.story{white-space:pre-line;line-height:1.75;font-size:17px}
+nav{display:flex;gap:7px;overflow:auto;margin-top:14px}
+nav button{white-space:nowrap;background:#202020;color:#fff;border:1px solid #444;padding:9px 12px}
+.big{font-size:31px;font-weight:900}
+.status{padding:14px;border-radius:12px;margin-top:12px;font-size:17px;line-height:1.45}
+.good{background:#102414;border:1px solid #315b38}.bad{background:#241010;border:1px solid #6a2929}.neutral{background:#191919;border:1px solid #444}
+.timebox{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 12px;margin:8px 0;background:#191919;border:1px solid #333;border-radius:13px}
+.timebox.current{border-color:#adff4f;box-shadow:0 0 0 1px #adff4f33}
+.timebox.complete{border-color:#315b38;opacity:.72}
+.timebox.missed{border-color:#7a2929;background:#211010}
+.timeinfo{min-width:0}.timeamount{font-size:18px;font-weight:800;margin-top:4px}
+.timecheck{display:flex;align-items:center;gap:7px;white-space:nowrap;font-size:13px;font-weight:800;cursor:pointer;touch-action:manipulation}
+.timecheck input{width:22px;height:22px;margin:0;accent-color:#adff4f}
 table{width:100%;border-collapse:collapse}th,td{padding:9px 5px;border-bottom:1px solid #333;text-align:left}th{color:#aaa;font-size:12px}
+.story{white-space:pre-line;line-height:1.75;font-size:17px}
+.hide{display:none}
 </style>
 </head>
 <body>
 <header>
-<h1>🏁 My Goal Tracker</h1><div class="green"><b>HELLCAT → TEXAS</b></div>
+<h1>ðï¸ Hellcat Goal Tracker</h1>
+<div class="green"><b>HELLCAT â TEXAS</b></div>
 <div class="sub">Your plan. Your numbers. Your progress.</div>
 <nav>
-<button onclick="jump('today')">Today</button><button onclick="jump('week')">Week</button>
-<button onclick="jump('goals')">Goals</button><button onclick="jump('story')">Story</button>
+<button onclick="jump('today')">Today</button>
+<button onclick="jump('schedule')">â° Schedule</button>
+<button onclick="jump('goals')">Goals</button>
+<button onclick="jump('week')">Week</button>
+<button onclick="jump('story')">Story</button>
 </nav>
 </header>
+
 <main>
 
 <section class="card" id="today">
-<h2>🔥 Today's Tracker</h2>
+<h2>ð¥ Today's Tracker</h2>
 <div class="grid">
 <div class="stat"><div class="label">Today's earnings</div><div class="value" id="todayEarn">$0</div></div>
 <div class="stat"><div class="label">Today's savings</div><div class="value" id="todaySave">$0</div></div>
 <div class="stat"><div class="label">Today's spending</div><div class="value" id="todaySpend">$0</div></div>
-<div class="stat"><div class="label">Hours worked</div><div class="value" id="todayHours">0</div></div>
+<div class="stat"><div class="label">Hours worked</div><div class="value" id="todayHours">0h</div></div>
 </div>
+
 <h3>Update today's numbers</h3>
 <label>Earnings today</label><input id="earn" type="number" min="0" step=".01" placeholder="240">
 <label>Savings today</label><input id="save" type="number" min="0" step=".01" placeholder="200">
@@ -51,402 +74,501 @@ table{width:100%;border-collapse:collapse}th,td{padding:9px 5px;border-bottom:1p
 <label>Hours worked</label><input id="hours" type="number" min="0" step=".1" placeholder="8">
 <button onclick="saveToday()">Save Today</button>
 <button class="secondary" onclick="resetToday()">Reset Today</button>
-<p class="muted">Your tracker saves on this device/browser.</p>
+<p class="muted" id="todayMessage" style="min-height:20px;margin:6px 0 0"></p>
+
+<div id="liveStatus" class="status neutral"></div>
 </section>
 
-<section class="card" id="week">
-<h2>📅 Weekly Tracker</h2>
+<section class="card" id="overall">
+<h2>ð Overall Progress</h2>
 <div class="grid">
-<div class="stat"><div class="label">Weekly earnings</div><div class="value" id="weekEarn">$0</div></div>
-<div class="stat"><div class="label">Weekly savings</div><div class="value" id="weekSave">$0</div></div>
-<div class="stat"><div class="label">Hours worked</div><div class="value" id="weekHours">0</div></div>
-<div class="stat"><div class="label">Average/hour</div><div class="value" id="weekRate">$0</div></div>
+<div class="stat"><div class="label">TOTAL EARNINGS</div><div class="value" id="allEarn">$0</div></div>
+<div class="stat"><div class="label">TOTAL SAVINGS</div><div class="value" id="allSave">$0</div></div>
+<div class="stat"><div class="label">TOTAL SPENDING</div><div class="value" id="allSpend">$0</div></div>
+<div class="stat"><div class="label">TOTAL HOURS</div><div class="value" id="allHours">0h</div></div>
 </div>
-<p>Target: <b>$1,680 gross/week</b> if you average $240/day for 7 days.</p>
+<p class="muted" style="margin-bottom:0">The Hellcat total is tied to <b>total savings</b>. Editing today's savings changes the total by the exact difference instead of adding it twice.</p>
+</section>
+
+<section class="card" id="schedule">
+<h2>â° 8:00 AM â 10:30 PM TIME BOXES</h2>
+<p><b>8:00 AM = get ready.</b> Your money checks start at 9:00 AM.</p>
+<p><b>Base earning check: $16.</b> Check each money box after you make the amount shown. If you miss a money check, that missed $16 is added to the next check. After the 10:30 AM check, any remaining missed checks roll into <b>11:00 PM â 1:00 AM</b> catch-up boxes.</p>
+<p><b>Hard stop: 1:00 AM.</b> If you are behind, the tracker increases the next required amount, but it never pushes your work past 1:00 AM.</p>
+<div id="timeBoxes"></div>
+<div class="status neutral">ð <b>Hard stop: 1:00 AM.</b><br>You stop at 1:00 AM even if you are behind.</div>
+</section>
+
+<section class="card" id="goals">
+<h2>ð Hellcat Fund</h2>
+<div class="grid">
+<div class="stat"><div class="label">Goal</div><div class="value">$60,000</div></div>
+<div class="stat"><div class="label">Saved</div><div class="value" id="hellSaved">$0</div></div>
+<div class="stat"><div class="label">Remaining</div><div class="value" id="remaining">$60,000</div></div>
+<div class="stat"><div class="label">Days left</div><div class="value" id="daysLeft">â</div></div>
+</div>
+<div class="progress"><div class="bar" id="hellBar"></div></div>
+<br>
+<button onclick="addHell(100)">+$100</button>
+<button onclick="addHell(500)">+$500</button>
+<button onclick="addHell(1000)">+$1,000</button>
+<button class="secondary" onclick="customHell()">Custom</button>
+</section>
+
+<section class="card" id="moneyAdjust">
+<h2>ð¸ Subtract Money</h2>
+<p>If you lose money, take money back out of the Hellcat fund, or enter a correction, you can subtract it here.</p>
+<label>Amount to subtract</label>
+<input id="lossAmount" type="number" min="0" step="0.01" placeholder="10">
+<label>Reason (optional)</label>
+<input id="lossReason" type="text" placeholder="Lost $10 / emergency / correction">
+<button onclick="subtractHellMoney()">â Subtract From Hellcat</button>
+<button class="secondary" onclick="undoLastAdjustment()">â©ï¸ Undo Last Subtraction</button>
+<p class="muted" id="adjustmentMessage"></p>
 </section>
 
 <section class="card">
-<h2>📆 Monthly Tracker</h2>
+<h2>ð  Texas Fund</h2>
+<p>Planning target: <b>$70,000</b>.</p>
+<div class="progress"><div class="bar" id="texBar"></div></div>
+<p><span class="big" id="texSaved">$0</span> saved</p>
+<button onclick="addTex(500)">+$500</button>
+<button onclick="addTex(1000)">+$1,000</button>
+<button class="secondary" onclick="customTex()">Custom</button>
+</section>
+
+<section class="card" id="week">
+<h2>ð Weekly Tracker</h2>
+<div class="grid">
+<div class="stat"><div class="label">Weekly earnings</div><div class="value" id="weekEarn">$0</div></div>
+<div class="stat"><div class="label">Weekly savings</div><div class="value" id="weekSave">$0</div></div>
+<div class="stat"><div class="label">Hours worked</div><div class="value" id="weekHours">0h</div></div>
+<div class="stat"><div class="label">Average/hour</div><div class="value" id="weekRate">$0</div></div>
+</div>
+<p>Base target: <b>$1,680 gross/week</b> at $240/day.</p>
+</section>
+
+<section class="card">
+<h2>ð Monthly Tracker</h2>
 <div class="grid">
 <div class="stat"><div class="label">Month earnings</div><div class="value" id="monthEarn">$0</div></div>
 <div class="stat"><div class="label">Month savings</div><div class="value" id="monthSave">$0</div></div>
 </div>
-<p>At $240/day: <b>$7,200 gross in 30 days</b>. Actual savings depend on expenses and taxes.</p>
-</section>
-
-<section class="card" id="goals">
-<h2>🏁 Hellcat Fund</h2>
-<p>Target: <b>$60,000</b> plus a separate cushion for ownership costs.</p>
-<div class="progress"><div class="bar" id="hellBar"></div></div>
-<p><span class="big" id="hellSaved">$0</span> saved</p>
-<button onclick="addHell(100)">+$100</button><button onclick="addHell(500)">+$500</button>
-<button onclick="addHell(1000)">+$1,000</button><button class="secondary" onclick="customHell()">Custom</button>
 </section>
 
 <section class="card">
-<h2>🏠 Texas Fund</h2>
-<p>Planning target: <b>$70,000</b> for down payment, closing costs and reserves.</p>
-<div class="progress"><div class="bar" id="texBar"></div></div>
-<p><span class="big" id="texSaved">$0</span> saved</p>
-<button onclick="addTex(500)">+$500</button><button onclick="addTex(1000)">+$1,000</button>
-<button class="secondary" onclick="customTex()">Custom</button>
+<h2>âï¸ Daily Wins</h2>
+<label class="timecheck"><input id="c1" type="checkbox" onchange="saveChecks()"> I showed up and worked.</label><br>
+<label class="timecheck"><input id="c2" type="checkbox" onchange="saveChecks()"> I tracked my earnings.</label><br>
+<label class="timecheck"><input id="c3" type="checkbox" onchange="saveChecks()"> I moved savings away from spending money.</label><br>
+<label class="timecheck"><input id="c4" type="checkbox" onchange="saveChecks()"> I handled my bills/essentials.</label><br>
+<label class="timecheck"><input id="c5" type="checkbox" onchange="saveChecks()"> I did something today for my future.</label>
 </section>
 
 <section class="card">
-<h2>☑️ Daily Wins</h2>
-<label class="check"><input id="c1" type="checkbox" onchange="saveChecks()"> I showed up and worked.</label>
-<label class="check"><input id="c2" type="checkbox" onchange="saveChecks()"> I tracked my earnings.</label>
-<label class="check"><input id="c3" type="checkbox" onchange="saveChecks()"> I moved savings away from spending money.</label>
-<label class="check"><input id="c4" type="checkbox" onchange="saveChecks()"> I handled my bills/essentials.</label>
-<label class="check"><input id="c5" type="checkbox" onchange="saveChecks()"> I did something today for my future.</label>
-</section>
-
-<section class="card">
-<h2>📊 Hellcat Milestones</h2>
-<table><tr><th>Milestone</th><th>Status</th></tr>
-<tr><td>$10,000</td><td id="m10">⬜</td></tr><tr><td>$20,000</td><td id="m20">⬜</td></tr>
-<tr><td>$30,000</td><td id="m30">⬜</td></tr><tr><td>$40,000</td><td id="m40">⬜</td></tr>
-<tr><td>$50,000</td><td id="m50">⬜</td></tr><tr><td>$60,000</td><td id="m60">⬜</td></tr></table>
+<h2>ð Hellcat Milestones</h2>
+<table>
+<tr><th>Milestone</th><th>Status</th></tr>
+<tr><td>$10,000</td><td id="m10">â¬</td></tr>
+<tr><td>$20,000</td><td id="m20">â¬</td></tr>
+<tr><td>$30,000</td><td id="m30">â¬</td></tr>
+<tr><td>$40,000</td><td id="m40">â¬</td></tr>
+<tr><td>$50,000</td><td id="m50">â¬</td></tr>
+<tr><td>$60,000</td><td id="m60">â¬</td></tr>
+</table>
 </section>
 
 <section class="card" id="story">
-<h2>📖 The Story</h2>
-<div class="story">I didn't start with thousands of dollars.
-
-I started around $1,000 a month.
-
-I had bills, a spending problem when money sat on my card, and a dream that looked much bigger than where I was.
-
-Then I stopped waiting for everything to be perfect.
-
-October 2026 became my setup month. I covered my essentials, built a cushion, and prepared for November 2.
-
-November 2 was the start of the next chapter.
-
-I didn't need to make the whole $60,000 in one day. I needed to win one day at a time.
-
-My long-term DoorDash target became around $240/day gross. I learned to track real dollars per hour because working longer isn't the only answer. Better orders and better hours matter too.
-
-Every day I track the number.
-
-$20. $60. $100. $150. $200. $240.
-
-The number grows.
-
-The Hellcat target is July 28, 2027.
-
-After the Hellcat, the dream gets bigger.
-
-Texas target: July 28, 2028.
-
-Long-term income target: around $7,000/month. A possible house-fund target is $3,000–$3,500/month when the budget allows.
-
-I'm not building everything in one day.
-
-I'm building it one day at a time.
-
-HELLCAT FIRST.
+<h2>ð The Story</h2>
+<div class="story">HELLCAT FIRST.
 
 TEXAS NEXT.
 
-I'M STILL BUILDING.</div>
-</section>
+I'm not building everything in one day.
 
-<section class="card">
-<h2>💡 Money Rule</h2>
-<p>Bills money has a job. Spending money has a job. Savings has a job. Emergency money has a job.</p>
-<p>Keep goal money separate from everyday spending so you don't have to rely on willpower.</p>
+I'm building it one day at a time.</div>
 </section>
 
 </main>
+
 <script>
-const KEY="goalTrackerV2";
-let data=JSON.parse(localStorage.getItem(KEY)||'{"hell":0,"tex":0,"entries":{}}');
-function money(n){return "$"+Number(n||0).toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:2})}
-function todayKey(){let d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
-function save(){localStorage.setItem(KEY,JSON.stringify(data));render()}
-function saveToday(){
- let k=todayKey();data.entries[k]={earn:+document.getElementById("earn").value||0,save:+document.getElementById("save").value||0,spend:+document.getElementById("spend").value||0,hours:+document.getElementById("hours").value||0};save()
-}
-function resetToday(){delete data.entries[todayKey()];save();loadToday()}
-function loadToday(){let x=data.entries[todayKey()]||{};["earn","save","spend","hours"].forEach(k=>document.getElementById(k).value=x[k]??"");render()}
-function addHell(n){data.hell+=n;save()} function addTex(n){data.tex+=n;save()}
-function customHell(){let n=parseFloat(prompt("How much do you want to add to the Hellcat fund?"));if(n>0){data.hell+=n;save()}}
-function customTex(){let n=parseFloat(prompt("How much do you want to add to the Texas fund?"));if(n>0){data.tex+=n;save()}}
-function saveChecks(){["c1","c2","c3","c4","c5"].forEach(id=>localStorage.setItem(id,document.getElementById(id).checked))}
-function loadChecks(){["c1","c2","c3","c4","c5"].forEach(id=>document.getElementById(id).checked=localStorage.getItem(id)==="true")}
-function render(){
- let t=data.entries[todayKey()]||{};document.getElementById("todayEarn").textContent=money(t.earn);document.getElementById("todaySave").textContent=money(t.save);document.getElementById("todaySpend").textContent=money(t.spend);document.getElementById("todayHours").textContent=(t.hours||0)+"h";
- let keys=Object.keys(data.entries), now=new Date(), weekEarn=0,weekSave=0,weekHours=0,monthEarn=0,monthSave=0;
- keys.forEach(k=>{let d=new Date(k+"T12:00:00"),x=data.entries[k];if((now-d)/86400000>=0&&(now-d)/86400000<7){weekEarn+=x.earn||0;weekSave+=x.save||0;weekHours+=x.hours||0}if(d.getMonth()==now.getMonth()&&d.getFullYear()==now.getFullYear()){monthEarn+=x.earn||0;monthSave+=x.save||0}});
- document.getElementById("weekEarn").textContent=money(weekEarn);document.getElementById("weekSave").textContent=money(weekSave);document.getElementById("weekHours").textContent=weekHours.toFixed(1)+"h";document.getElementById("weekRate").textContent=money(weekHours?weekEarn/weekHours:0);
- document.getElementById("monthEarn").textContent=money(monthEarn);document.getElementById("monthSave").textContent=money(monthSave);
- document.getElementById("hellSaved").textContent=money(data.hell);document.getElementById("hellBar").style.width=Math.min(100,data.hell/60000*100)+"%";
- document.getElementById("texSaved").textContent=money(data.tex);document.getElementById("texBar").style.width=Math.min(100,data.tex/70000*100)+"%";
- [10000,20000,30000,40000,50000,60000].forEach(n=>document.getElementById("m"+(n/1000)).textContent=data.hell>=n?"✅":"⬜");
-}
-function jump(id){document.getElementById(id).scrollIntoView({behavior:"smooth"})}
-loadToday();loadChecks();render();
- /* ===== HELL CAT TRACKER ===== */
+const KEY="HELLCAT_TRACKER_FINAL_V2";
+const HELL_GOAL=60000;
+const TEX_GOAL=70000;
+const DAILY_TARGET=240;
+const BLOCK_TARGET=16;
+const STOP_HOUR=1;
+const START_HOUR=8;
 
-const HELL_GOAL = 60000;
-const DAILY_TARGET = 240;
-const STOP_HOUR = 1;
-
-/* Time boxes: 11 AM through 1 AM */
-const HELL_TIME_BOXES = [
-  ["11 AM – 12 PM", 11],
-  ["12 PM – 1 PM", 12],
-  ["1 PM – 2 PM", 13],
-  ["2 PM – 3 PM", 14],
-  ["3 PM – 4 PM", 15],
-  ["4 PM – 5 PM", 16],
-  ["5 PM – 6 PM", 17],
-  ["6 PM – 7 PM", 18],
-  ["7 PM – 8 PM", 19],
-  ["8 PM – 9 PM", 20],
-  ["9 PM – 10 PM", 21],
-  ["10 PM – 11 PM", 22],
-  ["11 PM – 12 AM", 23],
-  ["12 AM – 1 AM", 0]
+const MORNING_BOXES=[
+  ["8:00 AM","GET READY"],
+  ["9:00 AM","EARN"],
+  ["9:30 AM","EARN"],
+  ["10:00 AM","EARN"],
+  ["10:30 AM","EARN"]
+];
+const CATCHUP_BOXES=[
+  ["11:00 PM","EARN"],
+  ["11:30 PM","EARN"],
+  ["12:00 AM","EARN"],
+  ["12:30 AM","EARN"],
+  ["1:00 AM","EARN"]
 ];
 
-function getHellSaved(){
-  return Number(data.hell || 0);
+let data=JSON.parse(localStorage.getItem(KEY)||'null');
+if(!data)data={hell:0,tex:0,entries:{},checks:{},timeChecks:{}};
+data.hell=Number(data.hell||0);
+data.tex=Number(data.tex||0);
+data.entries=data.entries||{};
+data.checks=data.checks||{};
+data.timeChecks=data.timeChecks||{};
+data.adjustments=data.adjustments||[];
+
+function money(n){
+ return "$"+Number(n||0).toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:2});
+}
+function todayKey(){
+ const d=new Date();
+ return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+}
+function saveData(){
+ localStorage.setItem(KEY,JSON.stringify(data));
+ renderAll();
+}
+function saveToday(){
+ const k=todayKey();
+ const old=data.entries[k]||{};
+ const next={
+  earn:Number(document.getElementById("earn").value)||0,
+  save:Number(document.getElementById("save").value)||0,
+  spend:Number(document.getElementById("spend").value)||0,
+  hours:Number(document.getElementById("hours").value)||0
+ };
+
+ // The daily Savings number is linked to the Hellcat total.
+ // We only apply the difference, so pressing Save Today twice never double-counts.
+ const savingsDifference=next.save-Number(old.save||0);
+ data.hell=Math.max(0,Number(data.hell||0)+savingsDifference);
+ data.entries[k]=next;
+ saveData();
+
+ const msg=document.getElementById("todayMessage");
+ if(msg){
+   msg.textContent="â Saved. Today's numbers and the overall Hellcat total are updated.";
+ }
+}
+function loadToday(){
+ const x=data.entries[todayKey()]||{};
+ ["earn","save","spend","hours"].forEach(id=>{
+  document.getElementById(id).value=x[id]??"";
+ });
+}
+function resetToday(){
+ const k=todayKey();
+ const old=data.entries[k]||{};
+ data.hell=Math.max(0,Number(data.hell||0)-Number(old.save||0));
+ delete data.entries[k];
+ delete data.timeChecks[k];
+ saveData();
+ loadToday();
+ const msg=document.getElementById("todayMessage");
+ if(msg) msg.textContent="Today was reset and its savings were removed from the overall total.";
+}
+function addHell(n){
+ data.hell=Math.max(0,Number(data.hell||0)+Number(n||0));
+ saveData();
+}
+function addTex(n){data.tex+=n;saveData()}
+function customHell(){
+ const n=Number(prompt("How much do you want to add to the Hellcat fund?"));
+ if(n>0){data.hell+=n;saveData()}
+}
+function customTex(){
+ const n=Number(prompt("How much do you want to add to the Texas fund?"));
+ if(n>0){data.tex+=n;saveData()}
 }
 
-function getHellDaysElapsed(){
-  const keys = Object.keys(data.entries || {});
-  return Math.max(1, keys.length);
+function subtractHellMoney(){
+ const amount=Number(document.getElementById("lossAmount").value);
+ const reason=document.getElementById("lossReason").value.trim();
+ const msg=document.getElementById("adjustmentMessage");
+
+ if(!(amount>0)){
+  msg.textContent="Enter an amount greater than $0.";
+  return;
+ }
+
+ const before=Number(data.hell||0);
+ const actual=Math.min(amount,before);
+ data.hell=before-actual;
+
+ data.adjustments.push({
+  type:"subtract",
+  amount:actual,
+  reason:reason||"Money lost/removed",
+  time:new Date().toISOString()
+ });
+
+ document.getElementById("lossAmount").value="";
+ document.getElementById("lossReason").value="";
+ saveData();
+
+ msg.textContent="â Subtracted "+money(actual)+" from your Hellcat fund.";
 }
 
-function getHellExpected(){
-  return Math.min(
-    HELL_GOAL,
-    getHellDaysElapsed() * DAILY_TARGET
-  );
+function undoLastAdjustment(){
+ const msg=document.getElementById("adjustmentMessage");
+ if(!data.adjustments.length){
+  msg.textContent="There is no subtraction to undo.";
+  return;
+ }
+
+ const last=data.adjustments.pop();
+ if(last.type==="subtract"){
+  data.hell=Number(data.hell||0)+Number(last.amount||0);
+ }
+ saveData();
+ msg.textContent="â©ï¸ Restored "+money(last.amount)+" from the last subtraction.";
+}
+function saveChecks(){
+ const k=todayKey();
+ data.checks[k]=["c1","c2","c3","c4","c5"].map(id=>document.getElementById(id).checked);
+ saveData();
+}
+function loadChecks(){
+ const a=data.checks[todayKey()]||[];
+ ["c1","c2","c3","c4","c5"].forEach((id,i)=>{
+  document.getElementById(id).checked=!!a[i];
+ });
 }
 
-function getHellBehind(){
-  return Math.max(
-    0,
-    getHellExpected() - getHellSaved()
-  );
+function setTimeCheck(key,checked){
+ const k=todayKey();
+ if(!data.timeChecks[k])data.timeChecks[k]={};
+ data.timeChecks[k][key]=checked;
+ saveData();
 }
 
-function getHellTodayTarget(){
-  return DAILY_TARGET + getHellBehind();
+function getCatchupRequired(){
+ const checks=data.timeChecks[todayKey()]||{};
+ // Each missed earning check creates one $16 catch-up block.
+ // Morning earning checks are 9:00, 9:30, 10:00, 10:30.
+ let missed=0;
+ for(let i=1;i<MORNING_BOXES.length;i++){
+   if(checks["m"+i]!==true) missed++;
+ }
+ // If a late catch-up box itself is missed, add one more $16 block.
+ for(let i=0;i<CATCHUP_BOXES.length;i++){
+   if(checks["c"+i]===true) break;
+   if(i===0){
+     // first catch-up box carries all morning misses
+   }else{
+     // only count another late block if the previous one was due and missed
+   }
+ }
+ return missed;
 }
 
-function getHellEarnedToday(){
-  const today = data.entries?.[todayKey()];
-  return Number(today?.earn || 0);
+function getTimeBoxState(){
+ const now=new Date();
+ const h=now.getHours(), m=now.getMinutes();
+ const checks=data.timeChecks[todayKey()]||{};
+ const morning=[
+   {key:"ready",label:"8:00 AM",type:"ready",minute:8*60},
+   {key:"m1",label:"9:00 AM",type:"earn",minute:9*60},
+   {key:"m2",label:"9:30 AM",type:"earn",minute:9*60+30},
+   {key:"m3",label:"10:00 AM",type:"earn",minute:10*60},
+   {key:"m4",label:"10:30 AM",type:"earn",minute:10*60+30}
+ ];
+ const late=[
+   {key:"c0",label:"11:00 PM",type:"earn",minute:23*60},
+   {key:"c1",label:"11:30 PM",type:"earn",minute:23*60+30},
+   {key:"c2",label:"12:00 AM",type:"earn",minute:24*60},
+   {key:"c3",label:"12:30 AM",type:"earn",minute:24*60+30},
+   {key:"c4",label:"1:00 AM",type:"earn",minute:25*60}
+ ];
+ const nowMin=(h<6?(h+24)*60:h*60)+m;
+
+ // Every missed earning check adds one $16 block to the NEXT check.
+ // Example: miss 9:00 ($16) -> 9:30 requires $32.
+ // Miss that too -> 10:00 requires $48.
+ let missedBefore=0;
+ const morningOut=morning.map((x,i)=>{
+   const checked=checks[x.key]===true;
+   const due=nowMin>=x.minute;
+
+   if(x.type==="ready"){
+     let state="upcoming",status="â UPCOMING";
+     if(checked){state="complete";status="â READY";}
+     else if(due){state="current";status="ð¡ GET READY";}
+     return {...x,checked,state,status,required:0};
+   }
+
+   const required=(missedBefore+1)*BLOCK_TARGET;
+   let state="upcoming",status="â UPCOMING";
+   if(checked){
+     state="complete";
+     status="â COMPLETE";
+   }else if(due){
+     state="current";
+     status="ð¡ MAKE "+money(required);
+     missedBefore++;
+   }
+   // If a check was missed, it rolls into the next check.
+   // If it was completed, the carry resets.
+   if(checked){
+     missedBefore=0;
+   }
+   return {...x,checked,state,status,required};
+ });
+
+ // Count all morning money checks that remain missed after their due time.
+ let morningMissed=0;
+ for(let i=1;i<morning.length;i++){
+   const x=morning[i];
+   if(nowMin>=x.minute && checks[x.key]!==true) morningMissed++;
+ }
+
+ // Late catch-up starts at 11 PM only when there is something to catch up.
+ // Every missed late box adds one more $16 block to the next late box.
+ let lateCarry=morningMissed;
+ const lateOut=late.map(x=>{
+   const checked=checks[x.key]===true;
+   const due=nowMin>=x.minute;
+   const required=Math.max(1,lateCarry)*BLOCK_TARGET;
+   let state="upcoming",status="â CATCH-UP READY";
+
+   if(checked){
+     state="complete";
+     status="â COMPLETE";
+     lateCarry=0;
+   }else if(due){
+     state="current";
+     status="ð¡ MAKE "+money(required);
+     lateCarry++;
+   }
+   return {...x,checked,state,status,required};
+ });
+
+ return {
+   morning:morningOut,
+   late:lateOut,
+   showLate:morningMissed>0,
+   missedMorning:morningMissed
+ };
 }
 
-function getHellCurrentStatus(){
-  const now = new Date();
-  const hour = now.getHours();
-  const minute = now.getMinutes();
-
-  const target = getHellTodayTarget();
-  const earned = getHellEarnedToday();
-
-  /*
-    Progress expected by the current time.
-    Work window is 11 AM → 1 AM.
-  */
-  let minutesWorked = 0;
-
-  if(hour >= 11){
-    minutesWorked = ((hour - 11) * 60) + minute;
-  }else{
-    minutesWorked = ((hour + 1) * 60) + minute;
-  }
-
-  const totalMinutes = 14 * 60;
-
-  minutesWorked = Math.max(
-    0,
-    Math.min(totalMinutes, minutesWorked)
-  );
-
-  const expectedByNow =
-    target * (minutesWorked / totalMinutes);
-
-  const difference =
-    earned - expectedByNow;
-
-  return {
-    target,
-    earned,
-    difference,
-    hour,
-    minute,
-    stopped: hour >= STOP_HOUR && hour < 11
-  };
-}
-
-function renderHellTimeBoxes(){
-
-  const now = new Date();
-  const currentHour = now.getHours();
-
-  return HELL_TIME_BOXES.map(box => {
-
-    const label = box[0];
-    const hour = box[1];
-
-    let state = "";
-
-    if(currentHour === hour){
-      state = "🟡 NOW";
-    }else if(
-      (currentHour >= 11 && hour >= 11 && hour < currentHour) ||
-      (currentHour < 11 && hour < currentHour)
-    ){
-      state = "✓";
-    }else{
-      state = "○";
-    }
-
-    return `
-      <div style="
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        padding:10px 12px;
-        margin:5px 0;
-        background:#191919;
-        border-radius:10px;
-      ">
-        <span>${label}</span>
-        <b>${state}</b>
+function renderTimeBoxes(){
+ const box=document.getElementById("timeBoxes");
+ const out=getTimeBoxState();
+ const morningHTML=out.morning.map(x=>{
+   if(x.state==="hidden") return "";
+   return `
+    <div class="timebox ${x.state}">
+      <div class="timeinfo">
+        <b>${x.label}</b>
+        <div class="timeamount">${x.type==="ready"?"Get ready / be ready to work":"Make "+money(x.required)}</div>
       </div>
-    `;
-  }).join("");
+      <label class="timecheck">
+        <input type="checkbox" ${x.checked?"checked":""} onchange="setTimeCheck('${x.key}',this.checked)">
+        ${x.status}
+      </label>
+    </div>`;
+ }).join("");
+
+ const lateHTML=out.showLate ? `
+   <div style="margin:16px 0 8px;font-weight:900;font-size:18px;">ð CATCH-UP BLOCKS</div>
+   <p class="muted">Each missed check adds another ${money(BLOCK_TARGET)} to the next late check.</p>
+   ${out.late.map(x=>`
+    <div class="timebox ${x.state}">
+      <div class="timeinfo">
+        <b>${x.label}</b>
+        <div class="timeamount">Catch-up required: ${money(x.required)}</div>
+      </div>
+      <label class="timecheck">
+        <input type="checkbox" ${x.checked?"checked":""} onchange="setTimeCheck('${x.key}',this.checked)">
+        ${x.status}
+      </label>
+    </div>`).join("")}
+ ` : `
+   <div class="status neutral" style="margin-top:12px;">
+     â No missed morning money checks. Catch-up boxes stay hidden.
+   </div>`;
+
+ box.innerHTML=morningHTML+lateHTML;
 }
 
-function updateHellTracker(){
+function getEarned(){
+ return Number((data.entries[todayKey()]||{}).earn||0);
+}
+function renderLive(){
+ const earned=getEarned();
+ const hour=new Date().getHours();
+ const stopped=hour>=STOP_HOUR&&hour<START_HOUR;
+ const expected=Math.min(DAILY_TARGET,Math.max(0,(hour>=START_HOUR?hour-START_HOUR:0))*DAILY_TARGET/14);
+ const diff=earned-expected;
+ const box=document.getElementById("liveStatus");
+ if(stopped){
+  box.className="status bad";
+  box.innerHTML="ð <b>STOP FOR TODAY.</b><br>It is 1:00 AM or later. Stop even if you are behind.";
+ }else if(diff>=0){
+  box.className="status good";
+  box.innerHTML=`ð¢ <b>ON TRACK BY ${money(diff)}</b><br>Earned today: ${money(earned)}. Keep checking off your time boxes.`;
+ }else{
+  box.className="status bad";
+  box.innerHTML=`ð´ <b>BEHIND BY ${money(Math.abs(diff))}</b><br>Earned today: ${money(earned)}. Your missed amount is added to the next time block.`;
+ }
+}
+function renderTotals(){
+ const now=new Date();
+ let we=0,ws=0,wh=0,me=0,ms=0;
+ let allEarn=0,allSave=0,allSpend=0,allHours=0;
+ Object.keys(data.entries).forEach(k=>{
+  const d=new Date(k+"T12:00:00"),x=data.entries[k]||{};
+  const earn=Number(x.earn)||0, save=Number(x.save)||0, spend=Number(x.spend)||0, hours=Number(x.hours)||0;
+  allEarn+=earn; allSave+=save; allSpend+=spend; allHours+=hours;
+  const age=(now-d)/86400000;
+  if(age>=0&&age<7){we+=earn;ws+=save;wh+=hours}
+  if(d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear()){me+=earn;ms+=save}
+ });
+ const t=data.entries[todayKey()]||{};
+ document.getElementById("todayEarn").textContent=money(t.earn);
+ document.getElementById("todaySave").textContent=money(t.save);
+ document.getElementById("todaySpend").textContent=money(t.spend);
+ document.getElementById("todayHours").textContent=(t.hours||0)+"h";
+ document.getElementById("weekEarn").textContent=money(we);
+ document.getElementById("weekSave").textContent=money(ws);
+ document.getElementById("weekHours").textContent=wh.toFixed(1)+"h";
+ document.getElementById("weekRate").textContent=money(wh?we/wh:0);
+ document.getElementById("monthEarn").textContent=money(me);
+ document.getElementById("monthSave").textContent=money(ms);
+ document.getElementById("allEarn").textContent=money(allEarn);
+ document.getElementById("allSave").textContent=money(allSave);
+ document.getElementById("allSpend").textContent=money(allSpend);
+ document.getElementById("allHours").textContent=allHours.toFixed(1)+"h";
 
-  let box = document.getElementById("hellTracker");
-
-  if(!box){
-    box = document.createElement("section");
-
-    box.id = "hellTracker";
-
-    box.style.marginTop = "20px";
-    box.style.padding = "18px";
-    box.style.borderRadius = "16px";
-    box.style.background = "#101010";
-    box.style.color = "#fff";
-
-    document.querySelector("main").appendChild(box);
-  }
-
-  const saved = getHellSaved();
-  const remaining = Math.max(0, HELL_GOAL - saved);
-  const behind = getHellBehind();
-  const status = getHellCurrentStatus();
-
-  let statusHTML = "";
-
-  if(status.stopped){
-
-    statusHTML = `
-      <div style="
-        margin-top:14px;
-        padding:14px;
-        border-radius:12px;
-        background:#241010;
-        font-size:19px;
-        font-weight:bold;
-      ">
-        🛑 STOP FOR TODAY
-        <div style="font-size:14px;margin-top:5px;">
-          It is 1:00 AM or later. Stop even if you are behind.
-        </div>
-      </div>
-    `;
-
-  }else if(status.difference >= 0){
-
-    statusHTML = `
-      <div style="
-        margin-top:14px;
-        padding:14px;
-        border-radius:12px;
-        background:#102414;
-        font-size:18px;
-        font-weight:bold;
-      ">
-        🟢 ON TRACK BY ${money(status.difference)}
-      </div>
-    `;
-
-  }else{
-
-    statusHTML = `
-      <div style="
-        margin-top:14px;
-        padding:14px;
-        border-radius:12px;
-        background:#241010;
-        font-size:18px;
-        font-weight:bold;
-      ">
-        🔴 BEHIND BY ${money(Math.abs(status.difference))}
-
-        <div style="
-          font-size:14px;
-          margin-top:6px;
-          font-weight:normal;
-        ">
-          Catch-up amount has been added to today's target.
-        </div>
-      </div>
-    `;
-  }
-
-  box.innerHTML = `
-    <h2 style="margin-top:0;">
-      🏎️ HELLcat $60,000 GOAL
-    </h2>
-
-    <div style="font-size:17px;line-height:1.8;">
-      <div>💰 Saved: <b>${money(saved)}</b></div>
-      <div>🏁 Goal: <b>${money(HELL_GOAL)}</b></div>
-      <div>📉 Remaining: <b>${money(remaining)}</b></div>
-      <div>🎯 Base daily target: <b>${money(DAILY_TARGET)}</b></div>
-      <div>🔥 Today's required target: <b>${money(status.target)}</b></div>
-      <div>💵 Earned today: <b>${money(status.earned)}</b></div>
-    </div>
-
-    ${statusHTML}
-
-    <h3 style="margin-bottom:8px;margin-top:20px;">
-      ⏰ TIME BOXES
-    </h3>
-
-    ${renderHellTimeBoxes()}
-
-    <div style="
-      margin-top:14px;
-      padding:12px;
-      background:#191919;
-      border-radius:10px;
-      font-size:14px;
-    ">
-      🛑 Hard stop: <b>1:00 AM</b><br>
-      Being behind does NOT extend the workday.
-    </div>
-  `;
+ // Keep the displayed Hellcat fund synchronized with the daily savings ledger.
+ // Direct additions/subtractions still work, but daily edits never double-count.
+ document.getElementById("hellSaved").textContent=money(data.hell);
+ document.getElementById("remaining").textContent=money(Math.max(0,HELL_GOAL-data.hell));
+ document.getElementById("hellBar").style.width=Math.min(100,data.hell/HELL_GOAL*100)+"%";
+ document.getElementById("texSaved").textContent=money(data.tex);
+ document.getElementById("texBar").style.width=Math.min(100,data.tex/TEX_GOAL*100)+"%";
+ [10000,20000,30000,40000,50000,60000].forEach(n=>document.getElementById("m"+n/1000).textContent=data.hell>=n?"â":"â¬");
+}
+function renderAll(){
+ renderTotals();
+ renderLive();
+ renderTimeBoxes();
+}
+function jump(id){
+ document.getElementById(id).scrollIntoView({behavior:"smooth"});
 }
 
-updateHellTracker();
-
-setInterval(updateHellTracker, 60000);
-
-/* ===== END HELL CAT TRACKER ===== */
+loadToday();
+loadChecks();
+renderAll();
+setInterval(renderAll,30000);
 </script>
-</body></html>
+</body>
+</html>
