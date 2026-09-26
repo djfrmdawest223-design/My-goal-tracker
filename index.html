@@ -1,467 +1,154 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#080808">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Hellcat Goal Tracker">
-<title>Hellcat Goal Tracker</title>
-<style>
-*{box-sizing:border-box}
-body{margin:0;background:#070707;color:#f7f7f7;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif}
-header{padding:48px 18px 18px;background:linear-gradient(145deg,#101010,#1a1a1a);border-bottom:1px solid #333;position:sticky;top:0;z-index:10}
-h1{font-size:32px;line-height:1.05;margin:0 0 6px}.green{color:#adff4f}.muted{color:#aaa}
-main{max-width:760px;margin:auto;padding:15px 14px 80px}
-.card{background:#111;border:1px solid #303030;border-radius:20px;padding:18px;margin:13px 0}
-h2{font-size:21px;margin:0 0 12px}h3{font-size:16px;margin:15px 0 7px}p{font-size:16px;line-height:1.5}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.stat{background:#191919;border-radius:15px;padding:13px}
-.label{font-size:12px;color:#999}.value{font-size:23px;font-weight:800;margin-top:3px}
-.big{font-size:31px;font-weight:900}
-input,button{font:inherit}
-input[type=number]{width:100%;background:#191919;color:#fff;border:1px solid #444;border-radius:12px;padding:12px;margin:5px 0 10px;font-size:16px}
-button{cursor:pointer;border:0;border-radius:12px;padding:12px 15px;font-weight:800;font-size:15px;margin:4px 3px 4px 0;background:#adff4f;color:#080808}
-button.secondary{background:#252525;color:#fff;border:1px solid #444}
-.progress{height:12px;background:#292929;border-radius:99px;overflow:hidden}.bar{height:100%;width:0;background:#adff4f}
-.status{padding:14px;border-radius:12px;margin-top:12px;font-size:16px;line-height:1.45}
-.good{background:#102414;border:1px solid #315b38}.bad{background:#241010;border:1px solid #6a2929}.neutral{background:#191919;border:1px solid #444}
-.timebox{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:14px 12px;margin:8px 0;background:#191919;border:1px solid #333;border-radius:14px}
-.timebox.complete{border-color:#315b38;opacity:.75}.timebox.current{border-color:#adff4f}.timebox.late{border-color:#684d22}.timebox.hard{border-color:#7a2929;background:#211010}
-.time{font-size:17px;font-weight:900}
-.money-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
-.money{background:#0d0d0d;border:1px solid #333;border-radius:10px;padding:8px}
-.money span{display:block;color:#999;font-size:10px;font-weight:800}.money b{display:block;font-size:17px;margin-top:3px}
-.check{display:flex;align-items:center;gap:7px;white-space:nowrap;font-size:13px;font-weight:800}
-.check input[type=checkbox]{width:23px;height:23px;margin:0;accent-color:#adff4f}
-.small{font-size:13px;color:#aaa}
-@media(max-width:520px){.grid{grid-template-columns:1fr}.timebox{grid-template-columns:1fr}.check{justify-content:flex-start}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GOAL TRACKER - Ultimate Dashboard</title>
+  <!-- Tailwind CSS CDN for visual framework -->
+  <script src="https://tailwindcss.com"></script>
+  <!-- Google Fonts for typography system styling -->
+  <link href="https://googleapis.com" rel="stylesheet">
+  <style>
+    body { font-family: 'Montserrat', sans-serif; background-color: #050505; color: #ffffff; }
+    .neon-script { font-family: 'Permanent Marker', cursive; }
+    .dashboard-card { background: rgba(24, 24, 27, 0.85); backdrop-filter: blur(8px); border: 1px solid rgba(63, 63, 70, 0.4); }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0c0c0e; }
+    ::-webkit-scrollbar-thumb { background: #22c55e; border-radius: 3px; }
+  </style>
 </head>
-<body>
-<header>
-<h1>ðï¸ Hellcat Goal Tracker</h1>
-<div class="green"><b>HELLCAT â TEXAS</b></div>
-<div class="muted">Your plan. Your numbers. Your progress.</div>
-</header>
+<body class="p-3 md:p-6 bg-radial from-zinc-900 to-black min-h-screen">
 
-<main>
-<section class="card">
-<h2>ð¥ Today's Tracker</h2>
-<div class="grid">
-<div class="stat"><div class="label">TODAY'S EARNINGS</div><div class="value" id="todayEarn">$0</div></div>
-<div class="stat"><div class="label">TODAY'S SAVINGS</div><div class="value" id="todaySave">$0</div></div>
-<div class="stat"><div class="label">TODAY'S SPENDING</div><div class="value" id="todaySpend">$0</div></div>
-<div class="stat"><div class="label">HOURS WORKED</div><div class="value" id="todayHours">0h</div></div>
-</div>
+  <!-- ================= HERO BRANDING HEADER ================= -->
+  <header class="w-full max-w-7xl mx-auto mb-6 relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-950 p-6 md:p-8 flex flex-col md:flex-row justify-between items-center gap-6 shadow-2xl">
+    <!-- Subtle cyber background graphic matrix layer -->
+    <div class="absolute inset-0 bg-gradient-to-r from-green-500/10 via-black/90 to-zinc-900/50 pointer-events-none"></div>
+    
+    <div class="relative z-10 text-center md:text-left">
+      <h1 class="text-4xl font-black tracking-tighter text-green-400 italic">GOAL TRACKER</h1>
+      <p class="text-xs text-zinc-400 tracking-widest uppercase font-bold mt-1">Bigger Plans. Same Grind.</p>
+    </div>
 
-<h3>Update today's numbers</h3>
-<label>Earnings today</label>
-<input id="earn" type="number" min="0" step=".01" placeholder="240">
-<label>Savings today</label>
-<input id="save" type="number" min="0" step=".01" placeholder="200">
-<label>Spending today</label>
-<input id="spend" type="number" min="0" step=".01" placeholder="50">
-<label>Hours worked</label>
-<input id="hours" type="number" min="0" step=".1" placeholder="8">
-<button onclick="saveToday()">Save Today</button>
-<button class="secondary" onclick="resetToday()">Reset Today</button>
-<div id="liveStatus" class="status neutral"></div>
-</section>
+    <div class="relative z-10 text-center">
+      <p class="neon-script text-2xl md:text-4xl text-yellow-400 tracking-wide drop-shadow-[0_4px_12px_rgba(234,179,8,0.3)]">
+        MAKE MONEY CHANGE YOUR LIFE
+      </p>
+      <p class="text-[10px] tracking-[0.2em] uppercase font-bold text-zinc-500 mt-1">"Same Kid. Bigger Goals."</p>
+    </div>
 
-<section class="card">
-<h2>ð Overall Progress</h2>
-<div class="grid">
-<div class="stat"><div class="label">TOTAL EARNINGS</div><div class="value" id="allEarn">$0</div></div>
-<div class="stat"><div class="label">TOTAL SAVINGS</div><div class="value" id="allSave">$0</div></div>
-<div class="stat"><div class="label">TOTAL SPENDING</div><div class="value" id="allSpend">$0</div></div>
-<div class="stat"><div class="label">TOTAL HOURS</div><div class="value" id="allHours">0h</div></div>
-</div>
-</section>
+    <div class="relative z-10 text-center md:text-right max-w-xs">
+      <p class="text-xs uppercase italic font-bold text-zinc-300 tracking-wide">
+        "Discipline today builds the life you want tomorrow."
+      </p>
+      <span class="inline-block mt-2 text-[10px] bg-red-500/20 text-red-400 border border-red-500/30 px-2 py-0.5 rounded font-black italic">HELLCAT</span>
+    </div>
+  </header>
 
-<section class="card">
-<h2>â° Daily Time Tracker</h2>
-<p><b>Daily target: $240</b> â¢ Average needed: about <b>$18/hour</b>.</p>
-<p class="muted">Every earning box shows <b>Make This Check</b> and <b>Should Have</b>. Check the box when you hit it.</p>
-<div id="timeBoxes"></div>
-<div class="status neutral"><b>ð 1:00 AM HARD STOP</b><br>Late boxes are for catching up only. Stop at 1:00 AM even if you are behind.</div>
-</section>
+  <!-- ================= APP NAVIGATION CONSOLE ================= -->
+  <nav class="w-full max-w-7xl mx-auto mb-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-2">
+    <button class="bg-green-500 text-black font-black py-3 px-4 rounded-xl text-xs uppercase tracking-wider shadow-lg shadow-green-500/20 border border-green-400">🟢 Dashboard</button>
+    <button class="dashboard-card hover:bg-zinc-800 text-zinc-400 py-3 px-4 rounded-xl text-xs uppercase tracking-wider font-bold transition">📋 Daily Tracker</button>
+    <button class="dashboard-card hover:bg-zinc-800 text-zinc-400 py-3 px-4 rounded-xl text-xs uppercase tracking-wider font-bold transition">⏱️ Time Boxes</button>
+    <button class="dashboard-card hover:bg-zinc-800 text-zinc-400 py-3 px-4 rounded-xl text-xs uppercase tracking-wider font-bold transition">🐈‍⬛ Hellcat Goal</button>
+    <button class="dashboard-card hover:bg-zinc-800 text-zinc-400 py-3 px-4 rounded-xl text-xs uppercase tracking-wider font-bold transition">📅 Calendar</button>
+    <button class="dashboard-card hover:bg-zinc-800 text-zinc-400 py-3 px-4 rounded-xl text-xs uppercase tracking-wider font-bold transition">🔥 Motivation</button>
+  </nav>
 
-<section class="card">
-<h2>ð Hellcat Fund</h2>
-<div class="grid">
-<div class="stat"><div class="label">GOAL</div><div class="value">$60,000</div></div>
-<div class="stat"><div class="label">SAVED</div><div class="value" id="hellSaved">$0</div></div>
-<div class="stat"><div class="label">REMAINING</div><div class="value" id="remaining">$60,000</div></div>
-</div>
-<div class="progress"><div class="bar" id="hellBar"></div></div>
-<br>
-<button onclick="addHell(100)">+$100</button>
-<button onclick="addHell(500)">+$500</button>
-<button onclick="addHell(1000)">+$1,000</button>
-<button class="secondary" onclick="customHell()">Custom</button>
-</section>
-
-<section class="card">
-<h2>ð¸ Subtract Money</h2>
-<p class="muted">If you lose money or spend money from the Hellcat fund, subtract it here.</p>
-<input id="lossAmount" type="number" min="0" step=".01" placeholder="Amount to subtract">
-<button onclick="subtractHell()">â Subtract</button>
-<button class="secondary" onclick="undoSubtract()">â©ï¸ Undo Last</button>
-<p id="lossMessage" class="muted"></p>
-</section>
-
-<section class="card">
-<h2>ð Weekly Tracker</h2>
-<div class="grid">
-<div class="stat"><div class="label">WEEKLY EARNINGS</div><div class="value" id="weekEarn">$0</div></div>
-<div class="stat"><div class="label">WEEKLY SAVINGS</div><div class="value" id="weekSave">$0</div></div>
-<div class="stat"><div class="label">HOURS</div><div class="value" id="weekHours">0h</div></div>
-<div class="stat"><div class="label">AVERAGE / HOUR</div><div class="value" id="weekRate">$0</div></div>
-</div>
-<p class="muted">Daily target: $240<br>Weekly target: $1,680</p>
-</section>
-
-<section class="card">
-<h2>ð Monthly Tracker</h2>
-<div class="grid">
-<div class="stat"><div class="label">MONTH EARNINGS</div><div class="value" id="monthEarn">$0</div></div>
-<div class="stat"><div class="label">MONTH SAVINGS</div><div class="value" id="monthSave">$0</div></div>
-</div>
-<p class="muted">Every day's saved amount is automatically included in the monthly total.</p>
-</section>
-
-<section class="card">
-<h2>âï¸ Daily Wins</h2>
-<label class="check"><input id="win1" type="checkbox" onchange="saveWins()"> I showed up and worked.</label><br>
-<label class="check"><input id="win2" type="checkbox" onchange="saveWins()"> I tracked my earnings.</label><br>
-<label class="check"><input id="win3" type="checkbox" onchange="saveWins()"> I protected my savings.</label><br>
-<label class="check"><input id="win4" type="checkbox" onchange="saveWins()"> I stayed focused on the Hellcat goal.</label>
-</section>
-</main>
-
-<script>
-const HELLCAT_GOAL=60000;
-const DAILY_TARGET=240;
-const STORAGE="hellcat_tracker_better_v1";
-
-/*
-NORMAL CHECKPOINTS:
-The "make" amounts add to exactly $240.
-9 AM through 10:30 PM = 13.5 hours.
-$240 / 13.5 = about $17.78/hour.
-*/
-const BOXES=[
- {time:"8:00 AM",make:0,ready:true},
- {time:"9:00 AM",make:16},
- {time:"10:00 AM",make:16},
- {time:"11:00 AM",make:16},
- {time:"12:00 PM",make:18},
- {time:"1:00 PM",make:18},
- {time:"2:00 PM",make:16},
- {time:"3:00 PM",make:16},
- {time:"4:00 PM",make:16},
- {time:"5:00 PM",make:16},
- {time:"6:00 PM",make:16},
- {time:"7:00 PM",make:16},
- {time:"8:00 PM",make:16},
- {time:"9:00 PM",make:16},
- {time:"10:00 PM",make:16},
- {time:"10:30 PM",make:18}
-];
-
-const LATE_BOXES=[
- {time:"11:00 PM",make:16},
- {time:"11:30 PM",make:16},
- {time:"12:00 AM",make:16},
- {time:"12:30 AM",make:16},
- {time:"1:00 AM",hard:true}
-];
-
-let data;
-try{data=JSON.parse(localStorage.getItem(STORAGE)||"null")}catch(e){data=null}
-if(!data)data={entries:{},checks:{},wins:{},manualSubtractions:0,lastSubtraction:0};
-
-function today(){
- const d=new Date();
- return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
-}
-function money(n){
- return "$"+Number(n||0).toLocaleString("en-US",{minimumFractionDigits:0,maximumFractionDigits:2});
-}
-function saveData(){
- localStorage.setItem(STORAGE,JSON.stringify(data));
- render();
-}
-function allSavings(){
- let total=0;
- Object.values(data.entries).forEach(x=>total+=Number(x.save)||0);
- return Math.max(0,total-(Number(data.manualSubtractions)||0));
-}
-
-function saveToday(){
- const k=today();
- data.entries[k]={
-  earn:Number(document.getElementById("earn").value)||0,
-  save:Number(document.getElementById("save").value)||0,
-  spend:Number(document.getElementById("spend").value)||0,
-  hours:Number(document.getElementById("hours").value)||0
- };
- saveData();
-}
-
-function resetToday(){
- const k=today();
- delete data.entries[k];
- delete data.checks[k];
- delete data.wins[k];
- saveData();
- loadToday();
-}
-
-function toggleCheck(i){
- const k=today();
- if(!data.checks[k])data.checks[k]={};
- data.checks[k]["normal"+i]=!data.checks[k]["normal"+i];
- saveData();
-}
-
-function toggleLate(i){
- const k=today();
- if(!data.checks[k])data.checks[k]={};
- data.checks[k]["late"+i]=!data.checks[k]["late"+i];
- saveData();
-}
-
-function renderTimeBoxes(){
- const container=document.getElementById("timeBoxes");
- const checks=data.checks[today()]||{};
- let cumulative=0;
- let html="";
-
- BOXES.forEach((box,i)=>{
-  if(!box.ready)cumulative+=box.make;
-  const checked=checks["normal"+i]===true;
-
-  html+=`
-  <div class="timebox ${checked?"complete":""}">
-   <div>
-    <div class="time">${box.time}</div>
-    ${
-      box.ready
-      ? `<div style="margin-top:6px">ð¢ <b>GET READY</b></div>`
-      : `<div class="money-grid">
-          <div class="money">
-           <span>MAKE THIS CHECK</span>
-           <b>${money(box.make)}</b>
+  <!-- ================= CORE GRID MATRIX CONTAINER ================= -->
+  <main class="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
+    
+    <!-- LEFT PANEL STACK -->
+    <div class="space-y-6">
+      
+      <!-- TODAY'S TRACKER CONSOLE CONTAINER -->
+      <section class="dashboard-card rounded-2xl p-5 shadow-xl">
+        <div class="flex justify-between items-center mb-4 border-b border-zinc-800 pb-3">
+          <h2 class="text-xs font-black uppercase tracking-widest text-zinc-300 flex items-center gap-2">
+            ⚡ TODAY'S TRACKER
+          </h2>
+          <span class="text-[10px] bg-green-500/10 text-green-400 font-black px-2 py-1 rounded border border-green-500/20 tracking-wider">$240 DAILY TARGET</span>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-3 mb-5">
+          <div class="bg-black/60 border border-zinc-800 rounded-xl p-3">
+            <p class="text-[9px] text-zinc-500 font-bold uppercase tracking-wider">EARNINGS TODAY</p>
+            <p id="card-earnings" class="text-2xl font-black text-green-400 mt-0.5">$0</p>
           </div>
-          <div class="money">
-           <span>SHOULD HAVE</span>
-           <b>${money(cumulative)}</b>
+          <div class="bg-black/60 border border-zinc-800 rounded-xl p-3">
+            <p class="text-[9px] text-zinc-500 font-bold uppercase tracking-wider">SAVINGS TODAY</p>
+            <p id="card-savings" class="text-2xl font-black text-green-400 mt-0.5">$0</p>
           </div>
-         </div>`
-    }
-   </div>
-   <label class="check">
-    <input type="checkbox" ${checked?"checked":""} onchange="toggleCheck(${i})">
-    ${checked?"â DONE":"â CHECK"}
-   </label>
-  </div>`;
- });
-
- html+=`<div style="margin:20px 0 8px;font-size:18px;font-weight:900">ð CATCH-UP CHECKPOINTS</div>`;
- html+=`<p class="small">Only use these if you're behind. They do not change the normal $240 plan.</p>`;
-
- let lateShould=cumulative;
- LATE_BOXES.forEach((box,i)=>{
-  const checked=checks["late"+i]===true;
-  if(!box.hard)lateShould+=box.make;
-
-  html+=`
-  <div class="timebox ${box.hard?"hard":"late"} ${checked?"complete":""}">
-   <div>
-    <div class="time">${box.time}</div>
-    ${
-      box.hard
-      ? `<div style="margin-top:6px"><b>ð HARD STOP</b><div class="muted">Stop working no matter how far behind you are.</div></div>`
-      : `<div class="money-grid">
-          <div class="money">
-           <span>MAKE THIS CHECK</span>
-           <b>${money(box.make)}</b>
+          <div class="bg-black/60 border border-zinc-800 rounded-xl p-3">
+            <p class="text-[9px] text-zinc-500 font-bold uppercase tracking-wider">SPENDING TODAY</p>
+            <p id="card-spending" class="text-2xl font-black text-red-400 mt-0.5">$0</p>
           </div>
-          <div class="money">
-           <span>SHOULD HAVE</span>
-           <b>${money(lateShould)}</b>
+          <div class="bg-black/60 border border-zinc-800 rounded-xl p-3">
+            <p class="text-[9px] text-zinc-500 font-bold uppercase tracking-wider">HOURS WORKED</p>
+            <p id="card-hours" class="text-2xl font-black text-zinc-300 mt-0.5">0h</p>
           </div>
-         </div>`
-    }
-   </div>
-   <label class="check">
-    <input type="checkbox" ${checked?"checked":""} onchange="toggleLate(${i})">
-    ${checked?"â DONE":"â CHECK"}
-   </label>
-  </div>`;
- });
- container.innerHTML=html;
-}
+        </div>
 
-function addHell(amount){
- const k=today();
- if(!data.entries[k])data.entries[k]={earn:0,save:0,spend:0,hours:0};
- data.entries[k].save=(Number(data.entries[k].save)||0)+Number(amount);
- saveData();
-}
+        <!-- Metric Engine Input Block Fields -->
+        <div class="space-y-3 mb-4 bg-black/30 p-3 rounded-xl border border-zinc-800/60">
+          <div>
+            <label class="text-[9px] font-black text-zinc-400 uppercase tracking-wider block mb-1">Log Daily Earnings ($)</label>
+            <input id="input-earnings" type="number" placeholder="240" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-green-400 font-bold focus:outline-none focus:border-green-500">
+          </div>
+          <div>
+            <label class="text-[9px] font-black text-zinc-400 uppercase tracking-wider block mb-1">Log Daily Savings ($)</label>
+            <input id="input-savings" type="number" placeholder="200" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-green-400 font-bold focus:outline-none focus:border-green-500">
+          </div>
+          <div>
+            <label class="text-[9px] font-black text-zinc-400 uppercase tracking-wider block mb-1">Log Daily Spending ($)</label>
+            <input id="input-spending" type="number" placeholder="50" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-red-400 font-bold focus:outline-none focus:border-red-500">
+          </div>
+          <div>
+            <label class="text-[9px] font-black text-zinc-400 uppercase tracking-wider block mb-1">Log Hours Tracked</label>
+            <input id="input-hours" type="number" step="0.5" placeholder="13.5" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-200 focus:outline-none focus:border-zinc-500">
+          </div>
+        </div>
 
-function customHell(){
- const amount=Number(prompt("How much do you want to add?"));
- if(amount>0)addHell(amount);
-}
+        <div class="flex gap-2">
+          <button onclick="updateTodayStats()" class="flex-1 bg-green-500 hover:bg-green-600 text-black font-black py-3 rounded-xl text-xs uppercase tracking-widest transition duration-150 active:scale-[0.98]">Save Today</button>
+          <button onclick="resetInputs()" class="bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-bold px-4 rounded-xl text-xs uppercase transition">Reset</button>
+        </div>
+      </section>
 
-function subtractHell(){
- const amount=Number(document.getElementById("lossAmount").value);
- if(!amount||amount<=0)return;
- data.manualSubtractions=(Number(data.manualSubtractions)||0)+amount;
- data.lastSubtraction=amount;
- document.getElementById("lossAmount").value="";
- document.getElementById("lossMessage").textContent="Subtracted "+money(amount)+" from the Hellcat fund.";
- saveData();
-}
+      <!-- AGGREGATE SYSTEM METRICS TRACKER -->
+      <section class="dashboard-card rounded-2xl p-5 shadow-xl">
+        <h2 class="text-xs font-black uppercase tracking-widest text-zinc-300 mb-4 border-b border-zinc-800 pb-2">
+          📈 OVERALL PROGRESS MATRIX
+        </h2>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="bg-black/40 border border-zinc-800/80 rounded-xl p-3">
+            <p class="text-[9px] text-zinc-500 font-bold uppercase tracking-wider">TOTAL EARNINGS</p>
+            <p id="total-earnings" class="text-xl font-black text-green-400 mt-0.5">$0</p>
+          </div>
+          <div class="bg-black/40 border border-zinc-800/80 rounded-xl p-3">
+            <p class="text-[9px] text-zinc-500 font-bold uppercase tracking-wider">TOTAL SAVINGS</p>
+            <p id="total-savings" class="text-xl font-black text-green-400 mt-0.5">$0</p>
+          </div>
+          <div class="bg-black/40 border border-zinc-800/80 rounded-xl p-3">
+            <p class="text-[9px] text-zinc-500 font-bold uppercase tracking-wider">TOTAL SPENDING</p>
+            <p id="total-spending" class="text-xl font-black text-red-400 mt-0.5">$0</p>
+          </div>
+          <div class="bg-black/40 border border-zinc-800/80 rounded-xl p-3">
+            <p class="text-[9px] text-zinc-500 font-bold uppercase tracking-wider">TOTAL HOURS</p>
+            <p id="total-hours" class="text-xl font-black text-zinc-200 mt-0.5">0h</p>
+          </div>
+        </div>
+      </section>
+    </div>
 
-function undoSubtract(){
- const amount=Number(data.lastSubtraction)||0;
- if(!amount)return;
- data.manualSubtractions=Math.max(0,(Number(data.manualSubtractions)||0)-amount);
- data.lastSubtraction=0;
- document.getElementById("lossMessage").textContent="Last subtraction undone.";
- saveData();
-}
-
-function saveWins(){
- const k=today();
- data.wins[k]={
-  1:document.getElementById("win1").checked,
-  2:document.getElementById("win2").checked,
-  3:document.getElementById("win3").checked,
-  4:document.getElementById("win4").checked
- };
- saveData();
-}
-
-function renderTotals(){
- const k=today();
- const t=data.entries[k]||{};
-
- document.getElementById("todayEarn").textContent=money(t.earn);
- document.getElementById("todaySave").textContent=money(t.save);
- document.getElementById("todaySpend").textContent=money(t.spend);
- document.getElementById("todayHours").textContent=(Number(t.hours)||0).toFixed(1)+"h";
-
- let allEarn=0,allSave=0,allSpend=0,allHours=0;
- Object.values(data.entries).forEach(x=>{
-  allEarn+=Number(x.earn)||0;
-  allSave+=Number(x.save)||0;
-  allSpend+=Number(x.spend)||0;
-  allHours+=Number(x.hours)||0;
- });
-
- document.getElementById("allEarn").textContent=money(allEarn);
- document.getElementById("allSave").textContent=money(allSave);
- document.getElementById("allSpend").textContent=money(allSpend);
- document.getElementById("allHours").textContent=allHours.toFixed(1)+"h";
-
- let weekEarn=0,weekSave=0,weekHours=0;
- const now=new Date();
-
- Object.entries(data.entries).forEach(([date,x])=>{
-  const d=new Date(date+"T12:00:00");
-  const days=Math.floor((now-d)/86400000);
-  if(days>=0&&days<7){
-   weekEarn+=Number(x.earn)||0;
-   weekSave+=Number(x.save)||0;
-   weekHours+=Number(x.hours)||0;
-  }
- });
-
- document.getElementById("weekEarn").textContent=money(weekEarn);
- document.getElementById("weekSave").textContent=money(weekSave);
- document.getElementById("weekHours").textContent=weekHours.toFixed(1)+"h";
- document.getElementById("weekRate").textContent=money(weekHours?weekEarn/weekHours:0);
-
- let monthEarn=0,monthSave=0;
- Object.entries(data.entries).forEach(([date,x])=>{
-  const d=new Date(date+"T12:00:00");
-  if(d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear()){
-   monthEarn+=Number(x.earn)||0;
-   monthSave+=Number(x.save)||0;
-  }
- });
-
- document.getElementById("monthEarn").textContent=money(monthEarn);
- document.getElementById("monthSave").textContent=money(monthSave);
-
- const saved=allSavings();
- document.getElementById("hellSaved").textContent=money(saved);
- document.getElementById("remaining").textContent=money(Math.max(0,HELLCAT_GOAL-saved));
- document.getElementById("hellBar").style.width=Math.min(100,saved/HELLCAT_GOAL*100)+"%";
-}
-
-function renderLive(){
- const earned=Number((data.entries[today()]||{}).earn)||0;
- const now=new Date();
- const minutes=now.getHours()*60+now.getMinutes();
-
- if(minutes>=60&&minutes<480){
-  document.getElementById("liveStatus").className="status bad";
-  document.getElementById("liveStatus").innerHTML="ð <b>STOP FOR TODAY.</b><br>1:00 AM is the hard stop.";
-  return;
- }
-
- const start=9*60;
- const end=22*60+30;
- const elapsed=Math.max(0,Math.min(end-start,minutes-start));
- const expected=DAILY_TARGET*(elapsed/(end-start));
- const difference=earned-expected;
-
- if(minutes<start){
-  document.getElementById("liveStatus").className="status neutral";
-  document.getElementById("liveStatus").innerHTML="â° <b>Before the earning checkpoints.</b><br>Be ready for the 9:00 AM box.";
- }else if(minutes>end){
-  document.getElementById("liveStatus").className=difference>=0?"status good":"status bad";
-  document.getElementById("liveStatus").innerHTML=difference>=0
-   ?"ð¢ <b>Daily $240 target reached/on track.</b>"
-   :"ð´ <b>Behind the $240 target.</b><br>Use the catch-up boxes, but stop at 1:00 AM.";
- }else if(difference>=0){
-  document.getElementById("liveStatus").className="status good";
-  document.getElementById("liveStatus").innerHTML="ð¢ <b>ON TRACK BY "+money(difference)+"</b><br>Keep going.";
- }else{
-  document.getElementById("liveStatus").className="status bad";
-  document.getElementById("liveStatus").innerHTML="ð´ <b>BEHIND BY "+money(Math.abs(difference))+"</b><br>Use the next checkpoints to catch up.";
- }
-}
-
-function loadToday(){
- const t=data.entries[today()]||{};
- document.getElementById("earn").value=t.earn??"";
- document.getElementById("save").value=t.save??"";
- document.getElementById("spend").value=t.spend??"";
- document.getElementById("hours").value=t.hours??"";
-
- const wins=data.wins[today()]||{};
- document.getElementById("win1").checked=!!wins[1];
- document.getElementById("win2").checked=!!wins[2];
- document.getElementById("win3").checked=!!wins[3];
- document.getElementById("win4").checked=!!wins[4];
-}
-
-function render(){
- renderTotals();
- renderTimeBoxes();
- renderLive();
-}
-
-loadToday();
-render();
-setInterval(render,30000);
-</script>
-</body>
-</html>
+    <!-- CENTER PANEL STACK -->
+    <div class="space-y-6">
+      
+      <!-- TIME BOX MATRIX HOURLY SEGMENTS -->
+      <section class="dashboard-card rounded-2xl p-5 shadow-xl">
+        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-4 border-b border-zinc-800 pb-3">
+          <div>
+            <h2 class="text-xs font-black uppercase tracking-widest text-zinc-300 flex items-center gap-2">
+              ⏰ TIME BOXES SCHEDULE
+            </h2>
+            <p class="text-[10px] text-green-400 font-bold tracking-wide mt-0.5">Average target: $18/hour (13.5 hours total)</p>
+          </div>
