@@ -187,5 +187,121 @@ function render(){
 }
 function jump(id){document.getElementById(id).scrollIntoView({behavior:"smooth"})}
 loadToday();loadChecks();render();
+ /* ===== HELL CAT TRACKER ===== */
+
+const HELL_GOAL = 60000;
+const DAILY_TARGET = 240;
+
+function getHellSaved(){
+  return Number(data.hell || 0);
+}
+
+function getDaysLeft(){
+  const deadline = new Date("2027-07-28T23:59:59");
+  return Math.max(0, Math.ceil((deadline - new Date()) / 86400000));
+}
+
+function getExpectedSaved(){
+  const keys = Object.keys(data.entries || {});
+  let total = 0;
+
+  keys.forEach(k => {
+    total += Number(data.entries[k]?.earn || 0);
+  });
+
+  return total;
+}
+
+function getBehindAmount(){
+  const saved = getHellSaved();
+  const expected = getExpectedSaved();
+
+  return Math.max(0, expected - saved);
+}
+
+function getTodayTarget(){
+  return DAILY_TARGET + getBehindAmount();
+}
+
+function updateHellStatus(){
+
+  let box = document.getElementById("hellStatus");
+
+  if(!box){
+    box = document.createElement("section");
+    box.id = "hellStatus";
+    box.style.marginTop = "20px";
+    box.style.padding = "18px";
+    box.style.borderRadius = "16px";
+    box.style.background = "#111";
+    box.style.color = "#fff";
+
+    document.querySelector("main").appendChild(box);
+  }
+
+  const saved = getHellSaved();
+  const remaining = Math.max(0, HELL_GOAL - saved);
+  const behind = getBehindAmount();
+  const todayTarget = getTodayTarget();
+  const daysLeft = getDaysLeft();
+
+  const now = new Date();
+  const hour = now.getHours();
+
+  let status;
+
+  if(behind > 0){
+    status = `
+      <div style="margin-top:10px;font-size:20px;font-weight:bold;">
+        🔴 BEHIND BY ${money(behind)}
+      </div>
+      <div style="margin-top:6px;">
+        Catch-up added to today's target.
+      </div>
+    `;
+  }else{
+    status = `
+      <div style="margin-top:10px;font-size:20px;font-weight:bold;">
+        🟢 ON TRACK
+      </div>
+    `;
+  }
+
+  let stopMessage = "";
+
+  if(hour >= 1){
+    stopMessage = `
+      <div style="margin-top:14px;font-size:20px;font-weight:bold;">
+        🛑 STOP FOR TODAY
+      </div>
+      <div style="margin-top:5px;">
+        Hard stop: 1:00 AM — even if you're behind.
+      </div>
+    `;
+  }
+
+  box.innerHTML = `
+    <h2 style="margin-top:0;">🏎️ HELLcat GOAL</h2>
+
+    <div>Goal: <b>${money(HELL_GOAL)}</b></div>
+    <div>Saved: <b>${money(saved)}</b></div>
+    <div>Remaining: <b>${money(remaining)}</b></div>
+    <div>Days left: <b>${daysLeft}</b></div>
+
+    <hr style="border-color:#333;margin:14px 0;">
+
+    <div>Base daily target: <b>${money(DAILY_TARGET)}</b></div>
+    <div>Today's target: <b>${money(todayTarget)}</b></div>
+
+    ${status}
+    ${stopMessage}
+  `;
+}
+
+updateHellStatus();
+
+setInterval(updateHellStatus, 60000);
+
+/* ===== END HELL CAT TRACKER ===== */
 </script>
 </body></html>
