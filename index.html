@@ -11,75 +11,65 @@
 *{box-sizing:border-box}
 body{margin:0;background:#070707;color:#f7f7f7;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif}
 header{padding:48px 18px 18px;background:linear-gradient(145deg,#101010,#1a1a1a);border-bottom:1px solid #333;position:sticky;top:0;z-index:10}
-h1{font-size:32px;line-height:1.05;margin:0 0 6px}
-.green{color:#adff4f}.sub,.muted{color:#aaa}
+h1{font-size:32px;line-height:1.05;margin:0 0 6px}.green{color:#adff4f}.muted{color:#aaa}
 main{max-width:760px;margin:auto;padding:15px 14px 80px}
 .card{background:#111;border:1px solid #303030;border-radius:20px;padding:18px;margin:13px 0}
-h2{font-size:21px;margin:0 0 12px}h3{font-size:16px;margin:15px 0 7px}
-p{font-size:17px;line-height:1.55;color:#eee}
+h2{font-size:21px;margin:0 0 12px}h3{font-size:16px;margin:15px 0 7px}p{font-size:16px;line-height:1.5}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
 .stat{background:#191919;border-radius:15px;padding:13px}
 .label{font-size:12px;color:#999}.value{font-size:23px;font-weight:800;margin-top:3px}
-input,button{font:inherit}
-input[type=number],input[type=text]{width:100%;background:#191919;color:#fff;border:1px solid #444;border-radius:12px;padding:12px;margin:5px 0 10px}
-button{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;background:#adff4f;color:#080808;border:0;border-radius:12px;padding:12px 15px;font-weight:800;margin:4px 3px 4px 0}
-button.secondary{background:#252525;color:#fff;border:1px solid #444}
-.progress{height:12px;background:#2b2b2b;border-radius:99px;overflow:hidden}.bar{height:100%;width:0;background:#adff4f;transition:.3s}
-nav{display:flex;gap:7px;overflow:auto;margin-top:14px}
-nav button{white-space:nowrap;background:#202020;color:#fff;border:1px solid #444;padding:9px 12px}
 .big{font-size:31px;font-weight:900}
-.status{padding:14px;border-radius:12px;margin-top:12px;font-size:17px;line-height:1.45}
+input,button{font:inherit}
+input[type=number]{width:100%;background:#191919;color:#fff;border:1px solid #444;border-radius:12px;padding:12px;margin:5px 0 10px;font-size:16px}
+button{cursor:pointer;border:0;border-radius:12px;padding:12px 15px;font-weight:800;font-size:15px;margin:4px 3px 4px 0;background:#adff4f;color:#080808}
+button.secondary{background:#252525;color:#fff;border:1px solid #444}
+.progress{height:12px;background:#292929;border-radius:99px;overflow:hidden}.bar{height:100%;width:0;background:#adff4f}
+.status{padding:14px;border-radius:12px;margin-top:12px;font-size:16px;line-height:1.45}
 .good{background:#102414;border:1px solid #315b38}.bad{background:#241010;border:1px solid #6a2929}.neutral{background:#191919;border:1px solid #444}
-.timebox{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 12px;margin:8px 0;background:#191919;border:1px solid #333;border-radius:13px}
-.timebox.current{border-color:#adff4f;box-shadow:0 0 0 1px #adff4f33}
-.timebox.complete{border-color:#315b38;opacity:.72}
-.timebox.missed{border-color:#7a2929;background:#211010}
-.timeinfo{min-width:0}.timeamount{font-size:18px;font-weight:800;margin-top:4px}
-.timecheck{display:flex;align-items:center;gap:7px;white-space:nowrap;font-size:13px;font-weight:800;cursor:pointer;touch-action:manipulation}
-.timecheck input{width:22px;height:22px;margin:0;accent-color:#adff4f}
-table{width:100%;border-collapse:collapse}th,td{padding:9px 5px;border-bottom:1px solid #333;text-align:left}th{color:#aaa;font-size:12px}
-.story{white-space:pre-line;line-height:1.75;font-size:17px}
-.hide{display:none}
+.timebox{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:14px 12px;margin:8px 0;background:#191919;border:1px solid #333;border-radius:14px}
+.timebox.complete{border-color:#315b38;opacity:.75}.timebox.current{border-color:#adff4f}.timebox.late{border-color:#684d22}.timebox.hard{border-color:#7a2929;background:#211010}
+.time{font-size:17px;font-weight:900}
+.money-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:8px}
+.money{background:#0d0d0d;border:1px solid #333;border-radius:10px;padding:8px}
+.money span{display:block;color:#999;font-size:10px;font-weight:800}.money b{display:block;font-size:17px;margin-top:3px}
+.check{display:flex;align-items:center;gap:7px;white-space:nowrap;font-size:13px;font-weight:800}
+.check input[type=checkbox]{width:23px;height:23px;margin:0;accent-color:#adff4f}
+.small{font-size:13px;color:#aaa}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.timebox{grid-template-columns:1fr}.check{justify-content:flex-start}}
 </style>
 </head>
 <body>
 <header>
 <h1>ðï¸ Hellcat Goal Tracker</h1>
 <div class="green"><b>HELLCAT â TEXAS</b></div>
-<div class="sub">Your plan. Your numbers. Your progress.</div>
-<nav>
-<button onclick="jump('today')">Today</button>
-<button onclick="jump('schedule')">â° Schedule</button>
-<button onclick="jump('goals')">Goals</button>
-<button onclick="jump('week')">Week</button>
-<button onclick="jump('story')">Story</button>
-</nav>
+<div class="muted">Your plan. Your numbers. Your progress.</div>
 </header>
 
 <main>
-
-<section class="card" id="today">
+<section class="card">
 <h2>ð¥ Today's Tracker</h2>
 <div class="grid">
-<div class="stat"><div class="label">Today's earnings</div><div class="value" id="todayEarn">$0</div></div>
-<div class="stat"><div class="label">Today's savings</div><div class="value" id="todaySave">$0</div></div>
-<div class="stat"><div class="label">Today's spending</div><div class="value" id="todaySpend">$0</div></div>
-<div class="stat"><div class="label">Hours worked</div><div class="value" id="todayHours">0h</div></div>
+<div class="stat"><div class="label">TODAY'S EARNINGS</div><div class="value" id="todayEarn">$0</div></div>
+<div class="stat"><div class="label">TODAY'S SAVINGS</div><div class="value" id="todaySave">$0</div></div>
+<div class="stat"><div class="label">TODAY'S SPENDING</div><div class="value" id="todaySpend">$0</div></div>
+<div class="stat"><div class="label">HOURS WORKED</div><div class="value" id="todayHours">0h</div></div>
 </div>
 
 <h3>Update today's numbers</h3>
-<label>Earnings today</label><input id="earn" type="number" min="0" step=".01" placeholder="240">
-<label>Savings today</label><input id="save" type="number" min="0" step=".01" placeholder="200">
-<label>Spending today</label><input id="spend" type="number" min="0" step=".01" placeholder="50">
-<label>Hours worked</label><input id="hours" type="number" min="0" step=".1" placeholder="8">
+<label>Earnings today</label>
+<input id="earn" type="number" min="0" step=".01" placeholder="240">
+<label>Savings today</label>
+<input id="save" type="number" min="0" step=".01" placeholder="200">
+<label>Spending today</label>
+<input id="spend" type="number" min="0" step=".01" placeholder="50">
+<label>Hours worked</label>
+<input id="hours" type="number" min="0" step=".1" placeholder="8">
 <button onclick="saveToday()">Save Today</button>
 <button class="secondary" onclick="resetToday()">Reset Today</button>
-<p class="muted" id="todayMessage" style="min-height:20px;margin:6px 0 0"></p>
-
 <div id="liveStatus" class="status neutral"></div>
 </section>
 
-<section class="card" id="overall">
+<section class="card">
 <h2>ð Overall Progress</h2>
 <div class="grid">
 <div class="stat"><div class="label">TOTAL EARNINGS</div><div class="value" id="allEarn">$0</div></div>
@@ -87,25 +77,22 @@ table{width:100%;border-collapse:collapse}th,td{padding:9px 5px;border-bottom:1p
 <div class="stat"><div class="label">TOTAL SPENDING</div><div class="value" id="allSpend">$0</div></div>
 <div class="stat"><div class="label">TOTAL HOURS</div><div class="value" id="allHours">0h</div></div>
 </div>
-<p class="muted" style="margin-bottom:0">The Hellcat total is tied to <b>total savings</b>. Editing today's savings changes the total by the exact difference instead of adding it twice.</p>
 </section>
 
-<section class="card" id="schedule">
-<h2>â° 8:00 AM â 10:30 PM TIME BOXES</h2>
-<p><b>8:00 AM = get ready.</b> Your money checks start at 9:00 AM.</p>
-<p><b>Base earning check: $16.</b> Check each money box after you make the amount shown. If you miss a money check, that missed $16 is added to the next check. After the 10:30 AM check, any remaining missed checks roll into <b>11:00 PM â 1:00 AM</b> catch-up boxes.</p>
-<p><b>Hard stop: 1:00 AM.</b> If you are behind, the tracker increases the next required amount, but it never pushes your work past 1:00 AM.</p>
+<section class="card">
+<h2>â° Daily Time Tracker</h2>
+<p><b>Daily target: $240</b> â¢ Average needed: about <b>$18/hour</b>.</p>
+<p class="muted">Every earning box shows <b>Make This Check</b> and <b>Should Have</b>. Check the box when you hit it.</p>
 <div id="timeBoxes"></div>
-<div class="status neutral">ð <b>Hard stop: 1:00 AM.</b><br>You stop at 1:00 AM even if you are behind.</div>
+<div class="status neutral"><b>ð 1:00 AM HARD STOP</b><br>Late boxes are for catching up only. Stop at 1:00 AM even if you are behind.</div>
 </section>
 
-<section class="card" id="goals">
+<section class="card">
 <h2>ð Hellcat Fund</h2>
 <div class="grid">
-<div class="stat"><div class="label">Goal</div><div class="value">$60,000</div></div>
-<div class="stat"><div class="label">Saved</div><div class="value" id="hellSaved">$0</div></div>
-<div class="stat"><div class="label">Remaining</div><div class="value" id="remaining">$60,000</div></div>
-<div class="stat"><div class="label">Days left</div><div class="value" id="daysLeft">â</div></div>
+<div class="stat"><div class="label">GOAL</div><div class="value">$60,000</div></div>
+<div class="stat"><div class="label">SAVED</div><div class="value" id="hellSaved">$0</div></div>
+<div class="stat"><div class="label">REMAINING</div><div class="value" id="remaining">$60,000</div></div>
 </div>
 <div class="progress"><div class="bar" id="hellBar"></div></div>
 <br>
@@ -115,460 +102,366 @@ table{width:100%;border-collapse:collapse}th,td{padding:9px 5px;border-bottom:1p
 <button class="secondary" onclick="customHell()">Custom</button>
 </section>
 
-<section class="card" id="moneyAdjust">
+<section class="card">
 <h2>ð¸ Subtract Money</h2>
-<p>If you lose money, take money back out of the Hellcat fund, or enter a correction, you can subtract it here.</p>
-<label>Amount to subtract</label>
-<input id="lossAmount" type="number" min="0" step="0.01" placeholder="10">
-<label>Reason (optional)</label>
-<input id="lossReason" type="text" placeholder="Lost $10 / emergency / correction">
-<button onclick="subtractHellMoney()">â Subtract From Hellcat</button>
-<button class="secondary" onclick="undoLastAdjustment()">â©ï¸ Undo Last Subtraction</button>
-<p class="muted" id="adjustmentMessage"></p>
+<p class="muted">If you lose money or spend money from the Hellcat fund, subtract it here.</p>
+<input id="lossAmount" type="number" min="0" step=".01" placeholder="Amount to subtract">
+<button onclick="subtractHell()">â Subtract</button>
+<button class="secondary" onclick="undoSubtract()">â©ï¸ Undo Last</button>
+<p id="lossMessage" class="muted"></p>
 </section>
 
 <section class="card">
-<h2>ð  Texas Fund</h2>
-<p>Planning target: <b>$70,000</b>.</p>
-<div class="progress"><div class="bar" id="texBar"></div></div>
-<p><span class="big" id="texSaved">$0</span> saved</p>
-<button onclick="addTex(500)">+$500</button>
-<button onclick="addTex(1000)">+$1,000</button>
-<button class="secondary" onclick="customTex()">Custom</button>
-</section>
-
-<section class="card" id="week">
 <h2>ð Weekly Tracker</h2>
 <div class="grid">
-<div class="stat"><div class="label">Weekly earnings</div><div class="value" id="weekEarn">$0</div></div>
-<div class="stat"><div class="label">Weekly savings</div><div class="value" id="weekSave">$0</div></div>
-<div class="stat"><div class="label">Hours worked</div><div class="value" id="weekHours">0h</div></div>
-<div class="stat"><div class="label">Average/hour</div><div class="value" id="weekRate">$0</div></div>
+<div class="stat"><div class="label">WEEKLY EARNINGS</div><div class="value" id="weekEarn">$0</div></div>
+<div class="stat"><div class="label">WEEKLY SAVINGS</div><div class="value" id="weekSave">$0</div></div>
+<div class="stat"><div class="label">HOURS</div><div class="value" id="weekHours">0h</div></div>
+<div class="stat"><div class="label">AVERAGE / HOUR</div><div class="value" id="weekRate">$0</div></div>
 </div>
-<p>Base target: <b>$1,680 gross/week</b> at $240/day.</p>
+<p class="muted">Daily target: $240<br>Weekly target: $1,680</p>
 </section>
 
 <section class="card">
 <h2>ð Monthly Tracker</h2>
 <div class="grid">
-<div class="stat"><div class="label">Month earnings</div><div class="value" id="monthEarn">$0</div></div>
-<div class="stat"><div class="label">Month savings</div><div class="value" id="monthSave">$0</div></div>
+<div class="stat"><div class="label">MONTH EARNINGS</div><div class="value" id="monthEarn">$0</div></div>
+<div class="stat"><div class="label">MONTH SAVINGS</div><div class="value" id="monthSave">$0</div></div>
 </div>
+<p class="muted">Every day's saved amount is automatically included in the monthly total.</p>
 </section>
 
 <section class="card">
 <h2>âï¸ Daily Wins</h2>
-<label class="timecheck"><input id="c1" type="checkbox" onchange="saveChecks()"> I showed up and worked.</label><br>
-<label class="timecheck"><input id="c2" type="checkbox" onchange="saveChecks()"> I tracked my earnings.</label><br>
-<label class="timecheck"><input id="c3" type="checkbox" onchange="saveChecks()"> I moved savings away from spending money.</label><br>
-<label class="timecheck"><input id="c4" type="checkbox" onchange="saveChecks()"> I handled my bills/essentials.</label><br>
-<label class="timecheck"><input id="c5" type="checkbox" onchange="saveChecks()"> I did something today for my future.</label>
+<label class="check"><input id="win1" type="checkbox" onchange="saveWins()"> I showed up and worked.</label><br>
+<label class="check"><input id="win2" type="checkbox" onchange="saveWins()"> I tracked my earnings.</label><br>
+<label class="check"><input id="win3" type="checkbox" onchange="saveWins()"> I protected my savings.</label><br>
+<label class="check"><input id="win4" type="checkbox" onchange="saveWins()"> I stayed focused on the Hellcat goal.</label>
 </section>
-
-<section class="card">
-<h2>ð Hellcat Milestones</h2>
-<table>
-<tr><th>Milestone</th><th>Status</th></tr>
-<tr><td>$10,000</td><td id="m10">â¬</td></tr>
-<tr><td>$20,000</td><td id="m20">â¬</td></tr>
-<tr><td>$30,000</td><td id="m30">â¬</td></tr>
-<tr><td>$40,000</td><td id="m40">â¬</td></tr>
-<tr><td>$50,000</td><td id="m50">â¬</td></tr>
-<tr><td>$60,000</td><td id="m60">â¬</td></tr>
-</table>
-</section>
-
-<section class="card" id="story">
-<h2>ð The Story</h2>
-<div class="story">HELLCAT FIRST.
-
-TEXAS NEXT.
-
-I'm not building everything in one day.
-
-I'm building it one day at a time.</div>
-</section>
-
 </main>
 
 <script>
-const KEY="HELLCAT_TRACKER_FINAL_V2";
-const HELL_GOAL=60000;
-const TEX_GOAL=70000;
+const HELLCAT_GOAL=60000;
 const DAILY_TARGET=240;
-const BLOCK_TARGET=16;
-const STOP_HOUR=1;
-const START_HOUR=8;
+const STORAGE="hellcat_tracker_better_v1";
 
-const MORNING_BOXES=[
-  ["8:00 AM","GET READY"],
-  ["9:00 AM","EARN"],
-  ["9:30 AM","EARN"],
-  ["10:00 AM","EARN"],
-  ["10:30 AM","EARN"]
+/*
+NORMAL CHECKPOINTS:
+The "make" amounts add to exactly $240.
+9 AM through 10:30 PM = 13.5 hours.
+$240 / 13.5 = about $17.78/hour.
+*/
+const BOXES=[
+ {time:"8:00 AM",make:0,ready:true},
+ {time:"9:00 AM",make:16},
+ {time:"10:00 AM",make:16},
+ {time:"11:00 AM",make:16},
+ {time:"12:00 PM",make:18},
+ {time:"1:00 PM",make:18},
+ {time:"2:00 PM",make:16},
+ {time:"3:00 PM",make:16},
+ {time:"4:00 PM",make:16},
+ {time:"5:00 PM",make:16},
+ {time:"6:00 PM",make:16},
+ {time:"7:00 PM",make:16},
+ {time:"8:00 PM",make:16},
+ {time:"9:00 PM",make:16},
+ {time:"10:00 PM",make:16},
+ {time:"10:30 PM",make:18}
 ];
-const CATCHUP_BOXES=[
-  ["11:00 PM","EARN"],
-  ["11:30 PM","EARN"],
-  ["12:00 AM","EARN"],
-  ["12:30 AM","EARN"],
-  ["1:00 AM","EARN"]
+
+const LATE_BOXES=[
+ {time:"11:00 PM",make:16},
+ {time:"11:30 PM",make:16},
+ {time:"12:00 AM",make:16},
+ {time:"12:30 AM",make:16},
+ {time:"1:00 AM",hard:true}
 ];
 
-let data=JSON.parse(localStorage.getItem(KEY)||'null');
-if(!data)data={hell:0,tex:0,entries:{},checks:{},timeChecks:{}};
-data.hell=Number(data.hell||0);
-data.tex=Number(data.tex||0);
-data.entries=data.entries||{};
-data.checks=data.checks||{};
-data.timeChecks=data.timeChecks||{};
-data.adjustments=data.adjustments||[];
+let data;
+try{data=JSON.parse(localStorage.getItem(STORAGE)||"null")}catch(e){data=null}
+if(!data)data={entries:{},checks:{},wins:{},manualSubtractions:0,lastSubtraction:0};
 
-function money(n){
- return "$"+Number(n||0).toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:2});
-}
-function todayKey(){
+function today(){
  const d=new Date();
  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
 }
-function saveData(){
- localStorage.setItem(KEY,JSON.stringify(data));
- renderAll();
+function money(n){
+ return "$"+Number(n||0).toLocaleString("en-US",{minimumFractionDigits:0,maximumFractionDigits:2});
 }
+function saveData(){
+ localStorage.setItem(STORAGE,JSON.stringify(data));
+ render();
+}
+function allSavings(){
+ let total=0;
+ Object.values(data.entries).forEach(x=>total+=Number(x.save)||0);
+ return Math.max(0,total-(Number(data.manualSubtractions)||0));
+}
+
 function saveToday(){
- const k=todayKey();
- const old=data.entries[k]||{};
- const next={
+ const k=today();
+ data.entries[k]={
   earn:Number(document.getElementById("earn").value)||0,
   save:Number(document.getElementById("save").value)||0,
   spend:Number(document.getElementById("spend").value)||0,
   hours:Number(document.getElementById("hours").value)||0
  };
-
- // The daily Savings number is linked to the Hellcat total.
- // We only apply the difference, so pressing Save Today twice never double-counts.
- const savingsDifference=next.save-Number(old.save||0);
- data.hell=Math.max(0,Number(data.hell||0)+savingsDifference);
- data.entries[k]=next;
  saveData();
+}
 
- const msg=document.getElementById("todayMessage");
- if(msg){
-   msg.textContent="â Saved. Today's numbers and the overall Hellcat total are updated.";
- }
-}
-function loadToday(){
- const x=data.entries[todayKey()]||{};
- ["earn","save","spend","hours"].forEach(id=>{
-  document.getElementById(id).value=x[id]??"";
- });
-}
 function resetToday(){
- const k=todayKey();
- const old=data.entries[k]||{};
- data.hell=Math.max(0,Number(data.hell||0)-Number(old.save||0));
+ const k=today();
  delete data.entries[k];
- delete data.timeChecks[k];
+ delete data.checks[k];
+ delete data.wins[k];
  saveData();
  loadToday();
- const msg=document.getElementById("todayMessage");
- if(msg) msg.textContent="Today was reset and its savings were removed from the overall total.";
-}
-function addHell(n){
- data.hell=Math.max(0,Number(data.hell||0)+Number(n||0));
- saveData();
-}
-function addTex(n){data.tex+=n;saveData()}
-function customHell(){
- const n=Number(prompt("How much do you want to add to the Hellcat fund?"));
- if(n>0){data.hell+=n;saveData()}
-}
-function customTex(){
- const n=Number(prompt("How much do you want to add to the Texas fund?"));
- if(n>0){data.tex+=n;saveData()}
 }
 
-function subtractHellMoney(){
- const amount=Number(document.getElementById("lossAmount").value);
- const reason=document.getElementById("lossReason").value.trim();
- const msg=document.getElementById("adjustmentMessage");
-
- if(!(amount>0)){
-  msg.textContent="Enter an amount greater than $0.";
-  return;
- }
-
- const before=Number(data.hell||0);
- const actual=Math.min(amount,before);
- data.hell=before-actual;
-
- data.adjustments.push({
-  type:"subtract",
-  amount:actual,
-  reason:reason||"Money lost/removed",
-  time:new Date().toISOString()
- });
-
- document.getElementById("lossAmount").value="";
- document.getElementById("lossReason").value="";
- saveData();
-
- msg.textContent="â Subtracted "+money(actual)+" from your Hellcat fund.";
-}
-
-function undoLastAdjustment(){
- const msg=document.getElementById("adjustmentMessage");
- if(!data.adjustments.length){
-  msg.textContent="There is no subtraction to undo.";
-  return;
- }
-
- const last=data.adjustments.pop();
- if(last.type==="subtract"){
-  data.hell=Number(data.hell||0)+Number(last.amount||0);
- }
- saveData();
- msg.textContent="â©ï¸ Restored "+money(last.amount)+" from the last subtraction.";
-}
-function saveChecks(){
- const k=todayKey();
- data.checks[k]=["c1","c2","c3","c4","c5"].map(id=>document.getElementById(id).checked);
- saveData();
-}
-function loadChecks(){
- const a=data.checks[todayKey()]||[];
- ["c1","c2","c3","c4","c5"].forEach((id,i)=>{
-  document.getElementById(id).checked=!!a[i];
- });
-}
-
-function setTimeCheck(key,checked){
- const k=todayKey();
- if(!data.timeChecks[k])data.timeChecks[k]={};
- data.timeChecks[k][key]=checked;
+function toggleCheck(i){
+ const k=today();
+ if(!data.checks[k])data.checks[k]={};
+ data.checks[k]["normal"+i]=!data.checks[k]["normal"+i];
  saveData();
 }
 
-function getCatchupRequired(){
- const checks=data.timeChecks[todayKey()]||{};
- // Each missed earning check creates one $16 catch-up block.
- // Morning earning checks are 9:00, 9:30, 10:00, 10:30.
- let missed=0;
- for(let i=1;i<MORNING_BOXES.length;i++){
-   if(checks["m"+i]!==true) missed++;
- }
- // If a late catch-up box itself is missed, add one more $16 block.
- for(let i=0;i<CATCHUP_BOXES.length;i++){
-   if(checks["c"+i]===true) break;
-   if(i===0){
-     // first catch-up box carries all morning misses
-   }else{
-     // only count another late block if the previous one was due and missed
-   }
- }
- return missed;
-}
-
-function getTimeBoxState(){
- const now=new Date();
- const h=now.getHours(), m=now.getMinutes();
- const checks=data.timeChecks[todayKey()]||{};
- const morning=[
-   {key:"ready",label:"8:00 AM",type:"ready",minute:8*60},
-   {key:"m1",label:"9:00 AM",type:"earn",minute:9*60},
-   {key:"m2",label:"9:30 AM",type:"earn",minute:9*60+30},
-   {key:"m3",label:"10:00 AM",type:"earn",minute:10*60},
-   {key:"m4",label:"10:30 AM",type:"earn",minute:10*60+30}
- ];
- const late=[
-   {key:"c0",label:"11:00 PM",type:"earn",minute:23*60},
-   {key:"c1",label:"11:30 PM",type:"earn",minute:23*60+30},
-   {key:"c2",label:"12:00 AM",type:"earn",minute:24*60},
-   {key:"c3",label:"12:30 AM",type:"earn",minute:24*60+30},
-   {key:"c4",label:"1:00 AM",type:"earn",minute:25*60}
- ];
- const nowMin=(h<6?(h+24)*60:h*60)+m;
-
- // Every missed earning check adds one $16 block to the NEXT check.
- // Example: miss 9:00 ($16) -> 9:30 requires $32.
- // Miss that too -> 10:00 requires $48.
- let missedBefore=0;
- const morningOut=morning.map((x,i)=>{
-   const checked=checks[x.key]===true;
-   const due=nowMin>=x.minute;
-
-   if(x.type==="ready"){
-     let state="upcoming",status="â UPCOMING";
-     if(checked){state="complete";status="â READY";}
-     else if(due){state="current";status="ð¡ GET READY";}
-     return {...x,checked,state,status,required:0};
-   }
-
-   const required=(missedBefore+1)*BLOCK_TARGET;
-   let state="upcoming",status="â UPCOMING";
-   if(checked){
-     state="complete";
-     status="â COMPLETE";
-   }else if(due){
-     state="current";
-     status="ð¡ MAKE "+money(required);
-     missedBefore++;
-   }
-   // If a check was missed, it rolls into the next check.
-   // If it was completed, the carry resets.
-   if(checked){
-     missedBefore=0;
-   }
-   return {...x,checked,state,status,required};
- });
-
- // Count all morning money checks that remain missed after their due time.
- let morningMissed=0;
- for(let i=1;i<morning.length;i++){
-   const x=morning[i];
-   if(nowMin>=x.minute && checks[x.key]!==true) morningMissed++;
- }
-
- // Late catch-up starts at 11 PM only when there is something to catch up.
- // Every missed late box adds one more $16 block to the next late box.
- let lateCarry=morningMissed;
- const lateOut=late.map(x=>{
-   const checked=checks[x.key]===true;
-   const due=nowMin>=x.minute;
-   const required=Math.max(1,lateCarry)*BLOCK_TARGET;
-   let state="upcoming",status="â CATCH-UP READY";
-
-   if(checked){
-     state="complete";
-     status="â COMPLETE";
-     lateCarry=0;
-   }else if(due){
-     state="current";
-     status="ð¡ MAKE "+money(required);
-     lateCarry++;
-   }
-   return {...x,checked,state,status,required};
- });
-
- return {
-   morning:morningOut,
-   late:lateOut,
-   showLate:morningMissed>0,
-   missedMorning:morningMissed
- };
+function toggleLate(i){
+ const k=today();
+ if(!data.checks[k])data.checks[k]={};
+ data.checks[k]["late"+i]=!data.checks[k]["late"+i];
+ saveData();
 }
 
 function renderTimeBoxes(){
- const box=document.getElementById("timeBoxes");
- const out=getTimeBoxState();
- const morningHTML=out.morning.map(x=>{
-   if(x.state==="hidden") return "";
-   return `
-    <div class="timebox ${x.state}">
-      <div class="timeinfo">
-        <b>${x.label}</b>
-        <div class="timeamount">${x.type==="ready"?"Get ready / be ready to work":"Make "+money(x.required)}</div>
-      </div>
-      <label class="timecheck">
-        <input type="checkbox" ${x.checked?"checked":""} onchange="setTimeCheck('${x.key}',this.checked)">
-        ${x.status}
-      </label>
-    </div>`;
- }).join("");
+ const container=document.getElementById("timeBoxes");
+ const checks=data.checks[today()]||{};
+ let cumulative=0;
+ let html="";
 
- const lateHTML=out.showLate ? `
-   <div style="margin:16px 0 8px;font-weight:900;font-size:18px;">ð CATCH-UP BLOCKS</div>
-   <p class="muted">Each missed check adds another ${money(BLOCK_TARGET)} to the next late check.</p>
-   ${out.late.map(x=>`
-    <div class="timebox ${x.state}">
-      <div class="timeinfo">
-        <b>${x.label}</b>
-        <div class="timeamount">Catch-up required: ${money(x.required)}</div>
-      </div>
-      <label class="timecheck">
-        <input type="checkbox" ${x.checked?"checked":""} onchange="setTimeCheck('${x.key}',this.checked)">
-        ${x.status}
-      </label>
-    </div>`).join("")}
- ` : `
-   <div class="status neutral" style="margin-top:12px;">
-     â No missed morning money checks. Catch-up boxes stay hidden.
-   </div>`;
+ BOXES.forEach((box,i)=>{
+  if(!box.ready)cumulative+=box.make;
+  const checked=checks["normal"+i]===true;
 
- box.innerHTML=morningHTML+lateHTML;
-}
-
-function getEarned(){
- return Number((data.entries[todayKey()]||{}).earn||0);
-}
-function renderLive(){
- const earned=getEarned();
- const hour=new Date().getHours();
- const stopped=hour>=STOP_HOUR&&hour<START_HOUR;
- const expected=Math.min(DAILY_TARGET,Math.max(0,(hour>=START_HOUR?hour-START_HOUR:0))*DAILY_TARGET/14);
- const diff=earned-expected;
- const box=document.getElementById("liveStatus");
- if(stopped){
-  box.className="status bad";
-  box.innerHTML="ð <b>STOP FOR TODAY.</b><br>It is 1:00 AM or later. Stop even if you are behind.";
- }else if(diff>=0){
-  box.className="status good";
-  box.innerHTML=`ð¢ <b>ON TRACK BY ${money(diff)}</b><br>Earned today: ${money(earned)}. Keep checking off your time boxes.`;
- }else{
-  box.className="status bad";
-  box.innerHTML=`ð´ <b>BEHIND BY ${money(Math.abs(diff))}</b><br>Earned today: ${money(earned)}. Your missed amount is added to the next time block.`;
- }
-}
-function renderTotals(){
- const now=new Date();
- let we=0,ws=0,wh=0,me=0,ms=0;
- let allEarn=0,allSave=0,allSpend=0,allHours=0;
- Object.keys(data.entries).forEach(k=>{
-  const d=new Date(k+"T12:00:00"),x=data.entries[k]||{};
-  const earn=Number(x.earn)||0, save=Number(x.save)||0, spend=Number(x.spend)||0, hours=Number(x.hours)||0;
-  allEarn+=earn; allSave+=save; allSpend+=spend; allHours+=hours;
-  const age=(now-d)/86400000;
-  if(age>=0&&age<7){we+=earn;ws+=save;wh+=hours}
-  if(d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear()){me+=earn;ms+=save}
+  html+=`
+  <div class="timebox ${checked?"complete":""}">
+   <div>
+    <div class="time">${box.time}</div>
+    ${
+      box.ready
+      ? `<div style="margin-top:6px">ð¢ <b>GET READY</b></div>`
+      : `<div class="money-grid">
+          <div class="money">
+           <span>MAKE THIS CHECK</span>
+           <b>${money(box.make)}</b>
+          </div>
+          <div class="money">
+           <span>SHOULD HAVE</span>
+           <b>${money(cumulative)}</b>
+          </div>
+         </div>`
+    }
+   </div>
+   <label class="check">
+    <input type="checkbox" ${checked?"checked":""} onchange="toggleCheck(${i})">
+    ${checked?"â DONE":"â CHECK"}
+   </label>
+  </div>`;
  });
- const t=data.entries[todayKey()]||{};
+
+ html+=`<div style="margin:20px 0 8px;font-size:18px;font-weight:900">ð CATCH-UP CHECKPOINTS</div>`;
+ html+=`<p class="small">Only use these if you're behind. They do not change the normal $240 plan.</p>`;
+
+ let lateShould=cumulative;
+ LATE_BOXES.forEach((box,i)=>{
+  const checked=checks["late"+i]===true;
+  if(!box.hard)lateShould+=box.make;
+
+  html+=`
+  <div class="timebox ${box.hard?"hard":"late"} ${checked?"complete":""}">
+   <div>
+    <div class="time">${box.time}</div>
+    ${
+      box.hard
+      ? `<div style="margin-top:6px"><b>ð HARD STOP</b><div class="muted">Stop working no matter how far behind you are.</div></div>`
+      : `<div class="money-grid">
+          <div class="money">
+           <span>MAKE THIS CHECK</span>
+           <b>${money(box.make)}</b>
+          </div>
+          <div class="money">
+           <span>SHOULD HAVE</span>
+           <b>${money(lateShould)}</b>
+          </div>
+         </div>`
+    }
+   </div>
+   <label class="check">
+    <input type="checkbox" ${checked?"checked":""} onchange="toggleLate(${i})">
+    ${checked?"â DONE":"â CHECK"}
+   </label>
+  </div>`;
+ });
+ container.innerHTML=html;
+}
+
+function addHell(amount){
+ const k=today();
+ if(!data.entries[k])data.entries[k]={earn:0,save:0,spend:0,hours:0};
+ data.entries[k].save=(Number(data.entries[k].save)||0)+Number(amount);
+ saveData();
+}
+
+function customHell(){
+ const amount=Number(prompt("How much do you want to add?"));
+ if(amount>0)addHell(amount);
+}
+
+function subtractHell(){
+ const amount=Number(document.getElementById("lossAmount").value);
+ if(!amount||amount<=0)return;
+ data.manualSubtractions=(Number(data.manualSubtractions)||0)+amount;
+ data.lastSubtraction=amount;
+ document.getElementById("lossAmount").value="";
+ document.getElementById("lossMessage").textContent="Subtracted "+money(amount)+" from the Hellcat fund.";
+ saveData();
+}
+
+function undoSubtract(){
+ const amount=Number(data.lastSubtraction)||0;
+ if(!amount)return;
+ data.manualSubtractions=Math.max(0,(Number(data.manualSubtractions)||0)-amount);
+ data.lastSubtraction=0;
+ document.getElementById("lossMessage").textContent="Last subtraction undone.";
+ saveData();
+}
+
+function saveWins(){
+ const k=today();
+ data.wins[k]={
+  1:document.getElementById("win1").checked,
+  2:document.getElementById("win2").checked,
+  3:document.getElementById("win3").checked,
+  4:document.getElementById("win4").checked
+ };
+ saveData();
+}
+
+function renderTotals(){
+ const k=today();
+ const t=data.entries[k]||{};
+
  document.getElementById("todayEarn").textContent=money(t.earn);
  document.getElementById("todaySave").textContent=money(t.save);
  document.getElementById("todaySpend").textContent=money(t.spend);
- document.getElementById("todayHours").textContent=(t.hours||0)+"h";
- document.getElementById("weekEarn").textContent=money(we);
- document.getElementById("weekSave").textContent=money(ws);
- document.getElementById("weekHours").textContent=wh.toFixed(1)+"h";
- document.getElementById("weekRate").textContent=money(wh?we/wh:0);
- document.getElementById("monthEarn").textContent=money(me);
- document.getElementById("monthSave").textContent=money(ms);
+ document.getElementById("todayHours").textContent=(Number(t.hours)||0).toFixed(1)+"h";
+
+ let allEarn=0,allSave=0,allSpend=0,allHours=0;
+ Object.values(data.entries).forEach(x=>{
+  allEarn+=Number(x.earn)||0;
+  allSave+=Number(x.save)||0;
+  allSpend+=Number(x.spend)||0;
+  allHours+=Number(x.hours)||0;
+ });
+
  document.getElementById("allEarn").textContent=money(allEarn);
  document.getElementById("allSave").textContent=money(allSave);
  document.getElementById("allSpend").textContent=money(allSpend);
  document.getElementById("allHours").textContent=allHours.toFixed(1)+"h";
 
- // Keep the displayed Hellcat fund synchronized with the daily savings ledger.
- // Direct additions/subtractions still work, but daily edits never double-count.
- document.getElementById("hellSaved").textContent=money(data.hell);
- document.getElementById("remaining").textContent=money(Math.max(0,HELL_GOAL-data.hell));
- document.getElementById("hellBar").style.width=Math.min(100,data.hell/HELL_GOAL*100)+"%";
- document.getElementById("texSaved").textContent=money(data.tex);
- document.getElementById("texBar").style.width=Math.min(100,data.tex/TEX_GOAL*100)+"%";
- [10000,20000,30000,40000,50000,60000].forEach(n=>document.getElementById("m"+n/1000).textContent=data.hell>=n?"â":"â¬");
+ let weekEarn=0,weekSave=0,weekHours=0;
+ const now=new Date();
+
+ Object.entries(data.entries).forEach(([date,x])=>{
+  const d=new Date(date+"T12:00:00");
+  const days=Math.floor((now-d)/86400000);
+  if(days>=0&&days<7){
+   weekEarn+=Number(x.earn)||0;
+   weekSave+=Number(x.save)||0;
+   weekHours+=Number(x.hours)||0;
+  }
+ });
+
+ document.getElementById("weekEarn").textContent=money(weekEarn);
+ document.getElementById("weekSave").textContent=money(weekSave);
+ document.getElementById("weekHours").textContent=weekHours.toFixed(1)+"h";
+ document.getElementById("weekRate").textContent=money(weekHours?weekEarn/weekHours:0);
+
+ let monthEarn=0,monthSave=0;
+ Object.entries(data.entries).forEach(([date,x])=>{
+  const d=new Date(date+"T12:00:00");
+  if(d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear()){
+   monthEarn+=Number(x.earn)||0;
+   monthSave+=Number(x.save)||0;
+  }
+ });
+
+ document.getElementById("monthEarn").textContent=money(monthEarn);
+ document.getElementById("monthSave").textContent=money(monthSave);
+
+ const saved=allSavings();
+ document.getElementById("hellSaved").textContent=money(saved);
+ document.getElementById("remaining").textContent=money(Math.max(0,HELLCAT_GOAL-saved));
+ document.getElementById("hellBar").style.width=Math.min(100,saved/HELLCAT_GOAL*100)+"%";
 }
-function renderAll(){
+
+function renderLive(){
+ const earned=Number((data.entries[today()]||{}).earn)||0;
+ const now=new Date();
+ const minutes=now.getHours()*60+now.getMinutes();
+
+ if(minutes>=60&&minutes<480){
+  document.getElementById("liveStatus").className="status bad";
+  document.getElementById("liveStatus").innerHTML="ð <b>STOP FOR TODAY.</b><br>1:00 AM is the hard stop.";
+  return;
+ }
+
+ const start=9*60;
+ const end=22*60+30;
+ const elapsed=Math.max(0,Math.min(end-start,minutes-start));
+ const expected=DAILY_TARGET*(elapsed/(end-start));
+ const difference=earned-expected;
+
+ if(minutes<start){
+  document.getElementById("liveStatus").className="status neutral";
+  document.getElementById("liveStatus").innerHTML="â° <b>Before the earning checkpoints.</b><br>Be ready for the 9:00 AM box.";
+ }else if(minutes>end){
+  document.getElementById("liveStatus").className=difference>=0?"status good":"status bad";
+  document.getElementById("liveStatus").innerHTML=difference>=0
+   ?"ð¢ <b>Daily $240 target reached/on track.</b>"
+   :"ð´ <b>Behind the $240 target.</b><br>Use the catch-up boxes, but stop at 1:00 AM.";
+ }else if(difference>=0){
+  document.getElementById("liveStatus").className="status good";
+  document.getElementById("liveStatus").innerHTML="ð¢ <b>ON TRACK BY "+money(difference)+"</b><br>Keep going.";
+ }else{
+  document.getElementById("liveStatus").className="status bad";
+  document.getElementById("liveStatus").innerHTML="ð´ <b>BEHIND BY "+money(Math.abs(difference))+"</b><br>Use the next checkpoints to catch up.";
+ }
+}
+
+function loadToday(){
+ const t=data.entries[today()]||{};
+ document.getElementById("earn").value=t.earn??"";
+ document.getElementById("save").value=t.save??"";
+ document.getElementById("spend").value=t.spend??"";
+ document.getElementById("hours").value=t.hours??"";
+
+ const wins=data.wins[today()]||{};
+ document.getElementById("win1").checked=!!wins[1];
+ document.getElementById("win2").checked=!!wins[2];
+ document.getElementById("win3").checked=!!wins[3];
+ document.getElementById("win4").checked=!!wins[4];
+}
+
+function render(){
  renderTotals();
- renderLive();
  renderTimeBoxes();
-}
-function jump(id){
- document.getElementById(id).scrollIntoView({behavior:"smooth"});
+ renderLive();
 }
 
 loadToday();
-loadChecks();
-renderAll();
-setInterval(renderAll,30000);
+render();
+setInterval(render,30000);
 </script>
 </body>
 </html>
