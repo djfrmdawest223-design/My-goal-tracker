@@ -191,49 +191,154 @@ loadToday();loadChecks();render();
 
 const HELL_GOAL = 60000;
 const DAILY_TARGET = 240;
+const STOP_HOUR = 1;
+
+/* Time boxes: 11 AM through 1 AM */
+const HELL_TIME_BOXES = [
+  ["11 AM – 12 PM", 11],
+  ["12 PM – 1 PM", 12],
+  ["1 PM – 2 PM", 13],
+  ["2 PM – 3 PM", 14],
+  ["3 PM – 4 PM", 15],
+  ["4 PM – 5 PM", 16],
+  ["5 PM – 6 PM", 17],
+  ["6 PM – 7 PM", 18],
+  ["7 PM – 8 PM", 19],
+  ["8 PM – 9 PM", 20],
+  ["9 PM – 10 PM", 21],
+  ["10 PM – 11 PM", 22],
+  ["11 PM – 12 AM", 23],
+  ["12 AM – 1 AM", 0]
+];
 
 function getHellSaved(){
   return Number(data.hell || 0);
 }
 
-function getDaysLeft(){
-  const deadline = new Date("2027-07-28T23:59:59");
-  return Math.max(0, Math.ceil((deadline - new Date()) / 86400000));
-}
-
-function getExpectedSaved(){
+function getHellDaysElapsed(){
   const keys = Object.keys(data.entries || {});
-  let total = 0;
-
-  keys.forEach(k => {
-    total += Number(data.entries[k]?.earn || 0);
-  });
-
-  return total;
+  return Math.max(1, keys.length);
 }
 
-function getBehindAmount(){
-  const saved = getHellSaved();
-  const expected = getExpectedSaved();
-
-  return Math.max(0, expected - saved);
+function getHellExpected(){
+  return Math.min(
+    HELL_GOAL,
+    getHellDaysElapsed() * DAILY_TARGET
+  );
 }
 
-function getTodayTarget(){
-  return DAILY_TARGET + getBehindAmount();
+function getHellBehind(){
+  return Math.max(
+    0,
+    getHellExpected() - getHellSaved()
+  );
 }
 
-function updateHellStatus(){
+function getHellTodayTarget(){
+  return DAILY_TARGET + getHellBehind();
+}
 
-  let box = document.getElementById("hellStatus");
+function getHellEarnedToday(){
+  const today = data.entries?.[todayKey()];
+  return Number(today?.earn || 0);
+}
+
+function getHellCurrentStatus(){
+  const now = new Date();
+  const hour = now.getHours();
+  const minute = now.getMinutes();
+
+  const target = getHellTodayTarget();
+  const earned = getHellEarnedToday();
+
+  /*
+    Progress expected by the current time.
+    Work window is 11 AM → 1 AM.
+  */
+  let minutesWorked = 0;
+
+  if(hour >= 11){
+    minutesWorked = ((hour - 11) * 60) + minute;
+  }else{
+    minutesWorked = ((hour + 1) * 60) + minute;
+  }
+
+  const totalMinutes = 14 * 60;
+
+  minutesWorked = Math.max(
+    0,
+    Math.min(totalMinutes, minutesWorked)
+  );
+
+  const expectedByNow =
+    target * (minutesWorked / totalMinutes);
+
+  const difference =
+    earned - expectedByNow;
+
+  return {
+    target,
+    earned,
+    difference,
+    hour,
+    minute,
+    stopped: hour >= STOP_HOUR && hour < 11
+  };
+}
+
+function renderHellTimeBoxes(){
+
+  const now = new Date();
+  const currentHour = now.getHours();
+
+  return HELL_TIME_BOXES.map(box => {
+
+    const label = box[0];
+    const hour = box[1];
+
+    let state = "";
+
+    if(currentHour === hour){
+      state = "🟡 NOW";
+    }else if(
+      (currentHour >= 11 && hour >= 11 && hour < currentHour) ||
+      (currentHour < 11 && hour < currentHour)
+    ){
+      state = "✓";
+    }else{
+      state = "○";
+    }
+
+    return `
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        padding:10px 12px;
+        margin:5px 0;
+        background:#191919;
+        border-radius:10px;
+      ">
+        <span>${label}</span>
+        <b>${state}</b>
+      </div>
+    `;
+  }).join("");
+}
+
+function updateHellTracker(){
+
+  let box = document.getElementById("hellTracker");
 
   if(!box){
     box = document.createElement("section");
-    box.id = "hellStatus";
+
+    box.id = "hellTracker";
+
     box.style.marginTop = "20px";
     box.style.padding = "18px";
     box.style.borderRadius = "16px";
-    box.style.background = "#111";
+    box.style.background = "#101010";
     box.style.color = "#fff";
 
     document.querySelector("main").appendChild(box);
@@ -241,66 +346,106 @@ function updateHellStatus(){
 
   const saved = getHellSaved();
   const remaining = Math.max(0, HELL_GOAL - saved);
-  const behind = getBehindAmount();
-  const todayTarget = getTodayTarget();
-  const daysLeft = getDaysLeft();
+  const behind = getHellBehind();
+  const status = getHellCurrentStatus();
 
-  const now = new Date();
-  const hour = now.getHours();
+  let statusHTML = "";
 
-  let status;
+  if(status.stopped){
 
-  if(behind > 0){
-    status = `
-      <div style="margin-top:10px;font-size:20px;font-weight:bold;">
-        🔴 BEHIND BY ${money(behind)}
-      </div>
-      <div style="margin-top:6px;">
-        Catch-up added to today's target.
-      </div>
-    `;
-  }else{
-    status = `
-      <div style="margin-top:10px;font-size:20px;font-weight:bold;">
-        🟢 ON TRACK
-      </div>
-    `;
-  }
-
-  let stopMessage = "";
-
-  if(hour >= 1){
-    stopMessage = `
-      <div style="margin-top:14px;font-size:20px;font-weight:bold;">
+    statusHTML = `
+      <div style="
+        margin-top:14px;
+        padding:14px;
+        border-radius:12px;
+        background:#241010;
+        font-size:19px;
+        font-weight:bold;
+      ">
         🛑 STOP FOR TODAY
+        <div style="font-size:14px;margin-top:5px;">
+          It is 1:00 AM or later. Stop even if you are behind.
+        </div>
       </div>
-      <div style="margin-top:5px;">
-        Hard stop: 1:00 AM — even if you're behind.
+    `;
+
+  }else if(status.difference >= 0){
+
+    statusHTML = `
+      <div style="
+        margin-top:14px;
+        padding:14px;
+        border-radius:12px;
+        background:#102414;
+        font-size:18px;
+        font-weight:bold;
+      ">
+        🟢 ON TRACK BY ${money(status.difference)}
+      </div>
+    `;
+
+  }else{
+
+    statusHTML = `
+      <div style="
+        margin-top:14px;
+        padding:14px;
+        border-radius:12px;
+        background:#241010;
+        font-size:18px;
+        font-weight:bold;
+      ">
+        🔴 BEHIND BY ${money(Math.abs(status.difference))}
+
+        <div style="
+          font-size:14px;
+          margin-top:6px;
+          font-weight:normal;
+        ">
+          Catch-up amount has been added to today's target.
+        </div>
       </div>
     `;
   }
 
   box.innerHTML = `
-    <h2 style="margin-top:0;">🏎️ HELLcat GOAL</h2>
+    <h2 style="margin-top:0;">
+      🏎️ HELLcat $60,000 GOAL
+    </h2>
 
-    <div>Goal: <b>${money(HELL_GOAL)}</b></div>
-    <div>Saved: <b>${money(saved)}</b></div>
-    <div>Remaining: <b>${money(remaining)}</b></div>
-    <div>Days left: <b>${daysLeft}</b></div>
+    <div style="font-size:17px;line-height:1.8;">
+      <div>💰 Saved: <b>${money(saved)}</b></div>
+      <div>🏁 Goal: <b>${money(HELL_GOAL)}</b></div>
+      <div>📉 Remaining: <b>${money(remaining)}</b></div>
+      <div>🎯 Base daily target: <b>${money(DAILY_TARGET)}</b></div>
+      <div>🔥 Today's required target: <b>${money(status.target)}</b></div>
+      <div>💵 Earned today: <b>${money(status.earned)}</b></div>
+    </div>
 
-    <hr style="border-color:#333;margin:14px 0;">
+    ${statusHTML}
 
-    <div>Base daily target: <b>${money(DAILY_TARGET)}</b></div>
-    <div>Today's target: <b>${money(todayTarget)}</b></div>
+    <h3 style="margin-bottom:8px;margin-top:20px;">
+      ⏰ TIME BOXES
+    </h3>
 
-    ${status}
-    ${stopMessage}
+    ${renderHellTimeBoxes()}
+
+    <div style="
+      margin-top:14px;
+      padding:12px;
+      background:#191919;
+      border-radius:10px;
+      font-size:14px;
+    ">
+      🛑 Hard stop: <b>1:00 AM</b><br>
+      Being behind does NOT extend the workday.
+    </div>
   `;
 }
 
-updateHellStatus();
+updateHellTracker();
 
-setInterval(updateHellStatus, 60000);
+setInterval(updateHellTracker, 60000);
 
 /* ===== END HELL CAT TRACKER ===== */
 </script>
