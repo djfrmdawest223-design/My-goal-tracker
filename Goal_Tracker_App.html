@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#070707">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Goal Tracker">
+<title>Goal Tracker</title>
+<style>
+*{box-sizing:border-box}
+:root{--bg:#070707;--panel:#111;--panel2:#151515;--line:#303030;--green:#8cff3f;--green2:#39d353;--muted:#aaa;--red:#ff5555}
+html,body{margin:0;background:#050505;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif}
+body{padding:0 14px 50px}
+button,input{font:inherit}
+button{cursor:pointer}
+.hero{max-width:1250px;margin:0 auto 10px;min-height:205px;border-radius:0 0 16px 16px;overflow:hidden;position:relative;border:1px solid #222;background:
+radial-gradient(circle at 25% 55%,#27331d 0 8%,transparent 25%),
+radial-gradient(circle at 78% 65%,#28351f 0 8%,transparent 28%),
+linear-gradient(120deg,#080808,#171b12 45%,#050505)}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.35),rgba(0,0,0,.05),rgba(0,0,0,.4))}
+.heroText{position:relative;z-index:2;padding:20px 24px;height:205px}
+.brand{font-size:clamp(35px,6vw,70px);font-weight:950;font-style:italic;letter-spacing:-3px}
+.brand span{color:var(--green)}
+.tag{font-size:13px;letter-spacing:4px;color:#ddd}
+.heroQuote{position:absolute;left:24px;bottom:30px;max-width:270px;font-weight:800;line-height:1.25}
+.heroMoney{position:absolute;right:33%;top:58px;color:#eee;font-size:18px;font-weight:900;transform:rotate(-5deg)}
+.heroMoney b{display:block;color:#d5d5d5;font-size:25px}
+.heroRight{position:absolute;right:25px;top:20px;text-align:right;font-weight:900;font-size:16px} .heroPic{position:absolute;z-index:1;object-fit:cover;opacity:.82;filter:saturate(1.05) contrast(1.05);pointer-events:none} .heroCarPic{right:39%;bottom:-12px;width:42%;height:190px;object-position:center 52%;mix-blend-mode:screen;mask-image:linear-gradient(to right,transparent 0%,#000 15%,#000 85%,transparent 100%)} .heroHousePic{right:0;top:0;width:38%;height:205px;object-position:center;opacity:.62;mask-image:linear-gradient(to right,transparent 0%,#000 20%,#000 100%)} .goalPhoto{width:100%;height:145px;object-fit:cover;border-radius:12px;border:1px solid #333;display:block;filter:saturate(1.08) contrast(1.05)} .goalImg{height:145px;border-radius:12px;overflow:hidden;border:1px solid #333;background:#080808}.goalImg img{width:100%;height:100%;object-fit:cover;display:block}
+.nav{max-width:1250px;margin:0 auto 12px;display:grid;grid-template-columns:repeat(7,1fr);gap:3px;background:#151515;border:1px solid #303030;border-radius:12px;padding:3px}
+.nav button{background:transparent;color:#aaa;border:0;border-radius:9px;padding:11px 5px;font-size:12px;font-weight:700}
+.nav button.active,.nav button:hover{background:#42a62c;color:#050505}
+.wrap{max-width:1250px;margin:auto}
+.grid3{display:grid;grid-template-columns:1fr 1.28fr .92fr;gap:12px}
+.card{background:linear-gradient(145deg,#141414,#0d0d0d);border:1px solid #303030;border-radius:15px;padding:14px;box-shadow:0 8px 25px #0007}
+.card h2{font-size:18px;margin:0 0 10px;font-weight:950;letter-spacing:.3px}
+.date{color:#aaa;font-size:13px;margin-bottom:12px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.stat{background:#080808;border:1px solid #292929;border-radius:11px;padding:10px}
+.label{font-size:10px;color:#999;text-transform:uppercase;font-weight:800}
+.val{font-size:23px;font-weight:950;margin-top:4px}
+.green{color:var(--green)} .red{color:#ff5b5b}
+.inputs{display:grid;gap:8px;margin-top:12px}
+input[type=number],input[type=text]{width:100%;background:#080808;border:1px solid #3a3a3a;border-radius:9px;color:white;padding:10px}
+.rowbtn{display:flex;gap:7px;margin-top:10px}
+.btn{border:0;border-radius:9px;padding:11px 12px;font-weight:900}
+.primary{background:var(--green);color:#050505;flex:1}
+.dark{background:#333;color:white}
+.danger{background:#ff5858;color:#080808}
+.quoteBox{margin-top:12px;background:#10260b;border:1px solid #4f9c2c;border-radius:12px;padding:12px;font-size:13px}
+.timeHeader{display:flex;justify-content:space-between;gap:10px;align-items:start}
+.badge{background:#10270b;color:var(--green);border:1px solid #4f9c2c;border-radius:7px;padding:4px 7px;font-size:10px;font-weight:900;white-space:nowrap}
+.sub{color:var(--green);font-size:12px;font-weight:800;margin-bottom:8px}
+.timebox{max-height:590px;overflow:auto;padding-right:3px}
+.trow{display:grid;grid-template-columns:28px 82px 1fr 65px;gap:6px;align-items:center;border-bottom:1px solid #252525;padding:6px 0;font-size:12px}
+.trow input{width:17px;height:17px;accent-color:#8cff3f}
+.trow.checked{opacity:.48}
+.catch{margin:9px 0 3px;color:#ddd;font-weight:900;font-size:11px}
+.goal{margin-bottom:10px}
+.goalTitle{font-size:15px;font-weight:950}
+.goalImg{height:110px;border-radius:10px;margin:8px 0;background:linear-gradient(135deg,#080808,#283020,#080808);display:flex;align-items:end;justify-content:center;overflow:hidden}
+.car{font-size:62px;filter:drop-shadow(0 4px 7px #000)}
+.house{font-size:60px}
+.goalAmount{font-size:24px;font-weight:950}
+.bar{height:13px;background:#333;border-radius:20px;overflow:hidden;margin:7px 0}
+.fill{height:100%;background:var(--green);width:0}
+.goalMeta{display:flex;justify-content:space-between;font-size:11px;color:#bbb}
+.goalBtns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-top:8px}
+.goalBtns button{background:var(--green);border:0;border-radius:7px;padding:8px 2px;font-size:11px;font-weight:900}
+.goalActions{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:7px}
+.goalActions button{padding:9px;border:0;border-radius:8px;font-weight:900}
+.bottom{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:12px}
+.miniGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.progress{font-size:18px;font-weight:950}
+.quoteGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.q{border:1px solid #444;background:#111;border-radius:9px;padding:12px;text-align:center;font-size:12px;font-weight:800}
+.wins{display:grid;gap:7px}
+.win{font-size:12px}
+.days{font-size:25px;color:var(--green);font-weight:950}
+.small{font-size:11px;color:#aaa}
+@media(max-width:950px){
+ .grid3{grid-template-columns:1fr}
+ .bottom{grid-template-columns:1fr}
+ .nav{grid-template-columns:repeat(3,1fr)}
+ .quoteGrid{grid-template-columns:1fr 1fr}
+ .heroMoney{right:12%}
+}
+@media(max-width:600px){
+ body{padding:0 7px 35px}
+ .hero{min-height:175px}.heroText{height:175px;padding:15px}.tag{font-size:9px}.heroQuote{left:15px;bottom:17px;font-size:11px}.heroRight{right:12px;font-size:11px}.heroMoney{top:55px;right:8%;font-size:12px}.heroMoney b{font-size:18px}
+ .nav{grid-template-columns:repeat(3,1fr)}
+ .card{padding:11px}
+ .trow{grid-template-columns:24px 68px 1fr 55px;font-size:11px}
+}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="heroText">
+    <div class="brand">GOAL <span>TRACKER</span></div>
+    <div class="tag">BIGGER PLANS. SAME GRIND.</div>
+    <div class="heroQuote">“DISCIPLINE TODAY<br>BUILDS THE LIFE<br>YOU WANT TOMORROW.”</div>
+    <div class="heroMoney">MAKE MONEY<br>CHANGE YOUR LIFE<b>$ $$$ $$$</b></div>
+    <div class="heroRight">“SAME KID.<br>BIGGER GOALS.”</div>
+  </div>
+</header>
+
+<nav class="nav">
+ <button class="active" onclick="scrollToId('dashboard')">▣ Dashboard</button>
+ <button onclick="scrollToId('daily')">▤ Daily Tracker</button>
+ <button onclick="scrollToId('time')">◷ Time Boxes</button>
+ <button onclick="scrollToId('hellcat')">🚗 Hellcat Goal</button>
+ <button onclick="scrollToId('texas')">⌂ Texas House Goal</button>
+ <button onclick="scrollToId('calendar')">▣ Calendar</button>
+ <button onclick="scrollToId('motivation')">★ Motivation</button>
+</nav>
+
+<main class="wrap">
+<div class="grid3" id="dashboard">
+<section class="card" id="daily">
+ <h2>▣ TODAY'S TRACKER</h2>
+ <div class="date" id="date"></div>
+ <div class="stats">
+  <div class="stat"><div class="label">Earnings</div><div class="val green" id="earnCard">$0</div></div>
+  <div class="stat"><div class="label">Savings</div><div class="val green" id="saveCard">$0</div></div>
+  <div class="stat"><div class="label">Spending</div><div class="val red" id="spendCard">$0</div></div>
+  <div class="stat"><div class="label">Hours</div><div class="val" id="hoursCard">0h</div></div>
+ </div>
+ <div class="inputs">
+  <input id="earn" type="number" placeholder="Earnings today">
+  <input id="save" type="number" placeholder="Savings today">
+  <input id="spend" type="number" placeholder="Spending today">
+  <input id="hours" type="number" step=".5" placeholder="Hours worked">
+ </div>
+ <div class="rowbtn"><button class="btn primary" onclick="saveToday()">Save Today</button><button class="btn dark" onclick="resetToday()">Reset</button></div>
+ <div class="quoteBox">💪 Get to <b>$240 today.</b><br>Keep going. You got this.</div>
+ <div class="card" style="margin-top:10px;padding:10px;background:#0a0a0a">
+   <div class="small">DAYS LEFT IN 30-DAY TRACK</div>
+   <div class="days" id="daysLeft">30 days</div>
+ </div>
+</section>
+
+<section class="card" id="time">
+ <div class="timeHeader"><div><h2>◷ TIME BOXES <span class="small">(8:00 AM - 10:30 PM)</span></h2><div class="sub">Average needed: $18/hour (13.5 hours)</div></div><span class="badge">$240 DAILY TARGET</span></div>
+ <div class="small" style="margin-bottom:8px">Check each box when you hit the amount. “Should Have” is your running target.</div>
+ <div class="timebox" id="timebox"></div>
+</section>
+
+<section class="card">
+ <h2>🏆 GOALS</h2>
+ <div id="hellcat" class="goal">
+  <div class="goalTitle">DODGE CHARGER WIDEBODY HELLCAT</div>
+  <div class="goalImg"><img class="goalPhoto" src="https://i0.wp.com/moparinsiders.com/wp-content/uploads/2023/08/Snapinsta.app_361671188_18375738853034678_6622588202445530584_n_1080.jpeg?resize=1024%2C953&ssl=1" alt="Dodge Charger SRT Hellcat Widebody"></div>
+  <div class="goalAmount">$60,000</div><div class="bar"><div id="hellFill" class="fill"></div></div>
+  <div class="goalMeta"><span>Saved: <b class="green" id="hellSaved">$0</b></span><span>Remaining: <b id="hellRemain">$60,000</b></span></div>
+  <div class="goalBtns"><button onclick="addGoal('hell',100)">+$100</button><button onclick="addGoal('hell',500)">+$500</button><button onclick="addGoal('hell',1000)">+$1,000</button></div>
+  <div class="goalActions"><button class="dark" onclick="customGoal('hell')">Custom Amount</button><button class="danger" onclick="subtractGoal('hell')">Subtract Money</button></div>
+ </div>
+ <div id="texas" class="goal">
+  <div class="goalTitle">TEXAS HOUSE</div>
+  <div class="goalImg"><img class="goalPhoto" src="https://www.windsorwindows.com/sites/default/files/assets/images/photo-gallery/windsorworld-fall-2022-texashill-patiopool.jpg" alt="Texas luxury house with pool"></div>
+  <div class="goalAmount">$469,999</div><div class="bar"><div id="texFill" class="fill"></div></div>
+  <div class="goalMeta"><span>Saved: <b class="green" id="texSaved">$0</b></span><span>Remaining: <b id="texRemain">$469,999</b></span></div>
+  <div class="goalBtns"><button onclick="addGoal('tex',100)">+$100</button><button onclick="addGoal('tex',500)">+$500</button><button onclick="addGoal('tex',1000)">+$1,000</button></div>
+  <div class="goalActions"><button class="dark" onclick="customGoal('tex')">Custom Amount</button><button class="danger" onclick="subtractGoal('tex')">Subtract Money</button></div>
+ </div>
+</section>
+</div>
+
+<div class="bottom">
+<section class="card">
+ <h2>📊 OVERALL PROGRESS</h2>
+ <div class="miniGrid">
+  <div class="stat"><div class="label">Total Earnings</div><div class="progress green" id="totalEarn">$0</div></div>
+  <div class="stat"><div class="label">Total Savings</div><div class="progress green" id="totalSave">$0</div></div>
+  <div class="stat"><div class="label">Total Spending</div><div class="progress red" id="totalSpend">$0</div></div>
+  <div class="stat"><div class="label">Total Hours</div><div class="progress" id="totalHours">0h</div></div>
+ </div>
+</section>
+<section class="card">
+ <h2>🗓️ WEEKLY TRACKER</h2>
+ <div class="miniGrid">
+  <div class="stat"><div class="label">Weekly Earnings</div><div class="progress green" id="weekEarn">$0</div></div>
+  <div class="stat"><div class="label">Weekly Savings</div><div class="progress green" id="weekSave">$0</div></div>
+  <div class="stat"><div class="label">Hours</div><div class="progress" id="weekHours">0h</div></div>
+  <div class="stat"><div class="label">Average / Hour</div><div class="progress green" id="avgHour">$0</div></div>
+ </div>
+ <div class="small" style="margin-top:8px">Weekly target: $1,680 ($240/day)</div>
+</section>
+<section class="card" id="calendar">
+ <h2>📅 MONTHLY TRACKER</h2>
+ <div class="miniGrid">
+  <div class="stat"><div class="label">Month Earnings</div><div class="progress green" id="monthEarn">$0</div></div>
+  <div class="stat"><div class="label">Month Savings</div><div class="progress green" id="monthSave">$0</div></div>
+  <div class="stat"><div class="label">Month Spending</div><div class="progress red" id="monthSpend">$0</div></div>
+  <div class="stat"><div class="label">Days Tracked</div><div class="progress" id="monthDays">0/30</div></div>
+ </div>
+ <div class="small" style="margin-top:8px">Monthly target: $7,200 ($240/day)</div>
+</section>
+</div>
+
+<section class="card" id="motivation" style="margin-top:12px">
+ <h2>💚 MOTIVATIONAL QUOTES</h2>
+ <div class="quoteGrid">
+  <div class="q">“A YEAR FROM NOW YOU'LL WISH YOU STARTED TODAY.”</div>
+  <div class="q">“DISCIPLINE TURNS GOALS INTO REALITY.”</div>
+  <div class="q">“STAY FOCUSED. GOOD THINGS TAKE TIME.”</div>
+  <div class="q">“BIGGER PLANS. SAME GRIND.”</div>
+  <div class="q">“THIS ISN'T JUST A CAR. IT'S FREEDOM.”</div>
+  <div class="q">“A TEXAS HOUSE ISN'T A DREAM. IT'S A PLAN.”</div>
+  <div class="q">“YOU CAN DO IT.”</div>
+  <div class="q">“KEEP GOING UNTIL IT HAPPENS.”</div>
+ </div>
+</section>
+
+<section class="card" style="margin-top:12px">
+ <h2>☑ DAILY WINS</h2>
+ <div class="wins">
+  <label class="win"><input type="checkbox"> I showed up and worked.</label>
+  <label class="win"><input type="checkbox"> I tracked my earnings.</label>
+  <label class="win"><input type="checkbox"> I protected my savings.</label>
+  <label class="win"><input type="checkbox"> I stayed focused on the Hellcat goal.</label>
+  <label class="win"><input type="checkbox"> I stayed focused on the Texas house goal.</label>
+ </div>
+ <div class="quoteBox"><b>👑 KEEP GOING.</b><br>The best is still ahead.</div>
+</section>
+</main>
+
+<script>
+const DAILY=240, HELL_GOAL=60000, TEX_GOAL=469999;
+let data=JSON.parse(localStorage.getItem("goalTrackerData")||'{"hell":0,"tex":0,"days":{},"checks":{}}');
+const money=n=>"$"+Number(n||0).toLocaleString();
+function todayKey(){return new Date().toISOString().slice(0,10)}
+function renderDate(){document.getElementById("date").textContent=new Date().toLocaleDateString(undefined,{weekday:"short",month:"short",day:"numeric",year:"numeric"})}
+function renderDays(){let start=data.start||todayKey(); if(!data.start){data.start=start;saveData()} let s=new Date(start+"T00:00:00"), now=new Date(); let d=Math.floor((now-s)/86400000); document.getElementById("daysLeft").textContent=Math.max(0,30-d)+" days left"}
+function saveData(){localStorage.setItem("goalTrackerData",JSON.stringify(data))}
+function current(){return data.days[todayKey()]||{earn:0,save:0,spend:0,hours:0}}
+function saveToday(){
+ let d={earn:+document.getElementById("earn").value||0,save:+document.getElementById("save").value||0,spend:+document.getElementById("spend").value||0,hours:+document.getElementById("hours").value||0};
+ data.days[todayKey()]=d; saveData(); render();
+}
+function resetToday(){delete data.days[todayKey()];saveData();render()}
+function render(){
+ renderDate();renderDays();let d=current();
+ document.getElementById("earn").value=d.earn||"";document.getElementById("save").value=d.save||"";document.getElementById("spend").value=d.spend||"";document.getElementById("hours").value=d.hours||"";
+ document.getElementById("earnCard").textContent=money(d.earn);document.getElementById("saveCard").textContent=money(d.save);document.getElementById("spendCard").textContent=money(d.spend);document.getElementById("hoursCard").textContent=(d.hours||0)+"h";
+ let days=Object.values(data.days), sums=k=>days.reduce((a,x)=>a+(+x[k]||0),0);
+ let te=sums("earn"),ts=sums("save"),tp=sums("spend"),th=sums("hours");
+ document.getElementById("totalEarn").textContent=money(te);document.getElementById("totalSave").textContent=money(ts);document.getElementById("totalSpend").textContent=money(tp);document.getElementById("totalHours").textContent=th+"h";
+ let wk=days.filter((_,i)=>i>=Math.max(0,days.length-7));let we=wk.reduce((a,x)=>a+x.earn,0),ws=wk.reduce((a,x)=>a+x.save,0),wh=wk.reduce((a,x)=>a+x.hours,0);
+ document.getElementById("weekEarn").textContent=money(we);document.getElementById("weekSave").textContent=money(ws);document.getElementById("weekHours").textContent=wh+"h";document.getElementById("avgHour").textContent=money(wh?we/wh:0);
+ document.getElementById("monthEarn").textContent=money(te);document.getElementById("monthSave").textContent=money(ts);document.getElementById("monthSpend").textContent=money(tp);document.getElementById("monthDays").textContent=days.length+"/30";
+ renderGoal("hell",HELL_GOAL,"hellSaved","hellRemain","hellFill");renderGoal("tex",TEX_GOAL,"texSaved","texRemain","texFill");
+}
+function renderGoal(k,goal,sid,rid,fid){let saved=Math.max(0,+data[k]||0);document.getElementById(sid).textContent=money(saved);document.getElementById(rid).textContent=money(Math.max(0,goal-saved));document.getElementById(fid).style.width=Math.min(100,saved/goal*100)+"%"}
+function addGoal(k,n){data[k]=Math.max(0,(+data[k]||0)+n);saveData();render()}
+function subtractGoal(k){let n=prompt("How much do you want to subtract?");if(n!==null){n=+n||0;data[k]=Math.max(0,(+data[k]||0)-n);saveData();render()}}
+function customGoal(k){let n=prompt("Enter amount to add:");if(n!==null){data[k]=Math.max(0,(+data[k]||0)+(+n||0));saveData();render()}}
+const schedule=[["8:00 AM","Get ready",0],["9:00 AM","$16",16],["10:00 AM","$16",16],["11:00 AM","$16",16],["12:00 PM","$18",18],["1:00 PM","$18",18],["2:00 PM","$16",16],["3:00 PM","$16",16],["4:00 PM","$16",16],["5:00 PM","$16",16],["6:00 PM","$16",16],["7:00 PM","$16",16],["8:00 PM","$16",16],["9:00 PM","$16",16],["10:00 PM","$16",16],["10:30 PM","$18",18]];
+const catchup=[["11:00 PM","$16",16],["11:30 PM","$16",16],["12:00 AM","$16",16],["12:30 AM","$16",16],["1:00 AM","HARD STOP",0]];
+function buildTimeboxes(){
+ let el=document.getElementById("timebox"),html="",total=0;
+ const add=(arr,catchy=false)=>arr.forEach((x,i)=>{if(!catchy&&x[2])total+=x[2];let should=catchy?total+(i+1)*16:(x[2]?total:0);let id=(catchy?"c":"n")+i;let checked=!!data.checks[id];html+=`<label class="trow ${checked?"checked":""}"><input type="checkbox" ${checked?"checked":""} onchange="toggleCheck('${id}',this)"><span>${x[0]}</span><b>${x[1]}</b><span class="small">${x[1]==="Get ready"?"—":money(should)}</span></label>`});
+ add(schedule);html+=`<div class="catch">🌙 CATCH-UP CHECKPOINTS <span class="small">(IF YOU'RE BEHIND)</span></div>`;add(catchup,true);el.innerHTML=html;
+}
+function toggleCheck(id,box){data.checks[id]=box.checked;saveData();box.parentElement.classList.toggle("checked",box.checked)}
+function scrollToId(id){document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"})}
+buildTimeboxes();render();
+</script>
+</body>
+</html>
