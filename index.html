@@ -99,26 +99,26 @@ input[type=number],input[type=text]{width:100%;background:#080808;border:1px sol
   <div class="heroText">
     <div class="brand">GOAL <span>TRACKER</span></div>
     <div class="tag">BIGGER PLANS. SAME GRIND.</div>
-    <div class="heroQuote">“DISCIPLINE TODAY<br>BUILDS THE LIFE<br>YOU WANT TOMORROW.”</div>
+    <div class="heroQuote">âDISCIPLINE TODAY<br>BUILDS THE LIFE<br>YOU WANT TOMORROW.â</div>
     <div class="heroMoney">MAKE MONEY<br>CHANGE YOUR LIFE<b>$ $$$ $$$</b></div>
-    <div class="heroRight">“SAME KID.<br>BIGGER GOALS.”</div>
+    <div class="heroRight">âSAME KID.<br>BIGGER GOALS.â</div>
   </div>
 </header>
 
 <nav class="nav">
- <button class="active" onclick="scrollToId('dashboard')">▣ Dashboard</button>
- <button onclick="scrollToId('daily')">▤ Daily Tracker</button>
- <button onclick="scrollToId('time')">◷ Time Boxes</button>
- <button onclick="scrollToId('hellcat')">🚗 Hellcat Goal</button>
- <button onclick="scrollToId('texas')">⌂ Texas House Goal</button>
- <button onclick="scrollToId('calendar')">▣ Calendar</button>
- <button onclick="scrollToId('motivation')">★ Motivation</button>
+ <button class="active" onclick="scrollToId('dashboard')">â£ Dashboard</button>
+ <button onclick="scrollToId('daily')">â¤ Daily Tracker</button>
+ <button onclick="scrollToId('time')">â· Time Boxes</button>
+ <button onclick="scrollToId('hellcat')">ð Hellcat Goal</button>
+ <button onclick="scrollToId('texas')">â Texas House Goal</button>
+ <button onclick="scrollToId('calendar')">â£ Calendar</button>
+ <button onclick="scrollToId('motivation')">â Motivation</button>
 </nav>
 
 <main class="wrap">
 <div class="grid3" id="dashboard">
 <section class="card" id="daily">
- <h2>▣ TODAY'S TRACKER</h2>
+ <h2>â£ TODAY'S TRACKER</h2>
  <div class="date" id="date"></div>
  <div class="stats">
   <div class="stat"><div class="label">Earnings</div><div class="val green" id="earnCard">$0</div></div>
@@ -133,7 +133,7 @@ input[type=number],input[type=text]{width:100%;background:#080808;border:1px sol
   <input id="hours" type="number" step=".5" placeholder="Hours worked">
  </div>
  <div class="rowbtn"><button class="btn primary" onclick="saveToday()">Save Today</button><button class="btn dark" onclick="resetToday()">Reset</button></div>
- <div class="quoteBox">💪 Get to <b>$240 today.</b><br>Keep going. You got this.</div>
+ <div class="quoteBox">ðª Get to <b>$240 today.</b><br>Keep going. You got this.</div>
  <div class="card" style="margin-top:10px;padding:10px;background:#0a0a0a">
    <div class="small">DAYS LEFT IN 30-DAY TRACK</div>
    <div class="days" id="daysLeft">30 days</div>
@@ -141,13 +141,13 @@ input[type=number],input[type=text]{width:100%;background:#080808;border:1px sol
 </section>
 
 <section class="card" id="time">
- <div class="timeHeader"><div><h2>◷ TIME BOXES <span class="small">(8:00 AM - 10:30 PM)</span></h2><div class="sub">Average needed: $18/hour (13.5 hours)</div></div><span class="badge">$240 DAILY TARGET</span></div>
- <div class="small" style="margin-bottom:8px">Check each box when you hit the amount. “Should Have” is your running target.</div>
+ <div class="timeHeader"><div><h2>â· TIME BOXES <span class="small">(8:00 AM - 10:30 PM)</span></h2><div class="sub">Average needed: $18/hour (13.5 hours)</div></div><span class="badge">$240 DAILY TARGET</span></div>
+ <div class="small" style="margin-bottom:8px">Check each box when you hit the amount. âShould Haveâ is your running target.</div>
  <div class="timebox" id="timebox"></div>
 </section>
 
 <section class="card">
- <h2>🏆 GOALS</h2>
+ <h2>ð GOALS</h2>
  <div id="hellcat" class="goal">
   <div class="goalTitle">DODGE CHARGER WIDEBODY HELLCAT</div>
   <div class="goalImg"><img class="goalPhoto" src="https://i0.wp.com/moparinsiders.com/wp-content/uploads/2023/08/Snapinsta.app_361671188_18375738853034678_6622588202445530584_n_1080.jpeg?resize=1024%2C953&ssl=1" alt="Dodge Charger SRT Hellcat Widebody"></div>
@@ -169,7 +169,7 @@ input[type=number],input[type=text]{width:100%;background:#080808;border:1px sol
 
 <div class="bottom">
 <section class="card">
- <h2>📊 OVERALL PROGRESS</h2>
+ <h2>ð OVERALL PROGRESS</h2>
  <div class="miniGrid">
   <div class="stat"><div class="label">Total Earnings</div><div class="progress green" id="totalEarn">$0</div></div>
   <div class="stat"><div class="label">Total Savings</div><div class="progress green" id="totalSave">$0</div></div>
@@ -178,7 +178,7 @@ input[type=number],input[type=text]{width:100%;background:#080808;border:1px sol
  </div>
 </section>
 <section class="card">
- <h2>🗓️ WEEKLY TRACKER</h2>
+ <h2>ðï¸ WEEKLY TRACKER</h2>
  <div class="miniGrid">
   <div class="stat"><div class="label">Weekly Earnings</div><div class="progress green" id="weekEarn">$0</div></div>
   <div class="stat"><div class="label">Weekly Savings</div><div class="progress green" id="weekSave">$0</div></div>
@@ -188,7 +188,7 @@ input[type=number],input[type=text]{width:100%;background:#080808;border:1px sol
  <div class="small" style="margin-top:8px">Weekly target: $1,680 ($240/day)</div>
 </section>
 <section class="card" id="calendar">
- <h2>📅 MONTHLY TRACKER</h2>
+ <h2>ð MONTHLY TRACKER</h2>
  <div class="miniGrid">
   <div class="stat"><div class="label">Month Earnings</div><div class="progress green" id="monthEarn">$0</div></div>
   <div class="stat"><div class="label">Month Savings</div><div class="progress green" id="monthSave">$0</div></div>
@@ -200,21 +200,21 @@ input[type=number],input[type=text]{width:100%;background:#080808;border:1px sol
 </div>
 
 <section class="card" id="motivation" style="margin-top:12px">
- <h2>💚 MOTIVATIONAL QUOTES</h2>
+ <h2>ð MOTIVATIONAL QUOTES</h2>
  <div class="quoteGrid">
-  <div class="q">“A YEAR FROM NOW YOU'LL WISH YOU STARTED TODAY.”</div>
-  <div class="q">“DISCIPLINE TURNS GOALS INTO REALITY.”</div>
-  <div class="q">“STAY FOCUSED. GOOD THINGS TAKE TIME.”</div>
-  <div class="q">“BIGGER PLANS. SAME GRIND.”</div>
-  <div class="q">“THIS ISN'T JUST A CAR. IT'S FREEDOM.”</div>
-  <div class="q">“A TEXAS HOUSE ISN'T A DREAM. IT'S A PLAN.”</div>
-  <div class="q">“YOU CAN DO IT.”</div>
-  <div class="q">“KEEP GOING UNTIL IT HAPPENS.”</div>
+  <div class="q">âA YEAR FROM NOW YOU'LL WISH YOU STARTED TODAY.â</div>
+  <div class="q">âDISCIPLINE TURNS GOALS INTO REALITY.â</div>
+  <div class="q">âSTAY FOCUSED. GOOD THINGS TAKE TIME.â</div>
+  <div class="q">âBIGGER PLANS. SAME GRIND.â</div>
+  <div class="q">âTHIS ISN'T JUST A CAR. IT'S FREEDOM.â</div>
+  <div class="q">âA TEXAS HOUSE ISN'T A DREAM. IT'S A PLAN.â</div>
+  <div class="q">âYOU CAN DO IT.â</div>
+  <div class="q">âKEEP GOING UNTIL IT HAPPENS.â</div>
  </div>
 </section>
 
 <section class="card" style="margin-top:12px">
- <h2>☑ DAILY WINS</h2>
+ <h2>â DAILY WINS</h2>
  <div class="wins">
   <label class="win"><input type="checkbox"> I showed up and worked.</label>
   <label class="win"><input type="checkbox"> I tracked my earnings.</label>
@@ -222,7 +222,7 @@ input[type=number],input[type=text]{width:100%;background:#080808;border:1px sol
   <label class="win"><input type="checkbox"> I stayed focused on the Hellcat goal.</label>
   <label class="win"><input type="checkbox"> I stayed focused on the Texas house goal.</label>
  </div>
- <div class="quoteBox"><b>👑 KEEP GOING.</b><br>The best is still ahead.</div>
+ <div class="quoteBox"><b>ð KEEP GOING.</b><br>The best is still ahead.</div>
 </section>
 </main>
 
@@ -260,8 +260,8 @@ const schedule=[["8:00 AM","Get ready",0],["9:00 AM","$16",16],["10:00 AM","$16"
 const catchup=[["11:00 PM","$16",16],["11:30 PM","$16",16],["12:00 AM","$16",16],["12:30 AM","$16",16],["1:00 AM","HARD STOP",0]];
 function buildTimeboxes(){
  let el=document.getElementById("timebox"),html="",total=0;
- const add=(arr,catchy=false)=>arr.forEach((x,i)=>{if(!catchy&&x[2])total+=x[2];let should=catchy?total+(i+1)*16:(x[2]?total:0);let id=(catchy?"c":"n")+i;let checked=!!data.checks[id];html+=`<label class="trow ${checked?"checked":""}"><input type="checkbox" ${checked?"checked":""} onchange="toggleCheck('${id}',this)"><span>${x[0]}</span><b>${x[1]}</b><span class="small">${x[1]==="Get ready"?"—":money(should)}</span></label>`});
- add(schedule);html+=`<div class="catch">🌙 CATCH-UP CHECKPOINTS <span class="small">(IF YOU'RE BEHIND)</span></div>`;add(catchup,true);el.innerHTML=html;
+ const add=(arr,catchy=false)=>arr.forEach((x,i)=>{if(!catchy&&x[2])total+=x[2];let should=catchy?total+(i+1)*16:(x[2]?total:0);let id=(catchy?"c":"n")+i;let checked=!!data.checks[id];html+=`<label class="trow ${checked?"checked":""}"><input type="checkbox" ${checked?"checked":""} onchange="toggleCheck('${id}',this)"><span>${x[0]}</span><b>${x[1]}</b><span class="small">${x[1]==="Get ready"?"â":money(should)}</span></label>`});
+ add(schedule);html+=`<div class="catch">ð CATCH-UP CHECKPOINTS <span class="small">(IF YOU'RE BEHIND)</span></div>`;add(catchup,true);el.innerHTML=html;
 }
 function toggleCheck(id,box){data.checks[id]=box.checked;saveData();box.parentElement.classList.toggle("checked",box.checked)}
 function scrollToId(id){document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"})}
